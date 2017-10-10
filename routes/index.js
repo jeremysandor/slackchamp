@@ -22,6 +22,7 @@ router.get('/login', passport.authenticate('auth0', {
   audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
   scope: 'openid profile'}),
   function(req, res) {
+    console.log('login request', req);
     res.redirect("/");
 });
 
@@ -35,6 +36,7 @@ router.get('/callback',
     failureRedirect: '/failure'
   }),
   function(req, res) {
+    console.log('callback req', req.user);
     res.redirect(req.session.returnTo || '/user');
   }
 );

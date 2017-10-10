@@ -1,5 +1,6 @@
 var pgp = require('pg-promise')();
-var connectionString = 'postgres://localhost:5432/slackchamp';
+// var connectionString = 'postgres://localhost:5432/slackchamp';
+var connectionString = 'postgres://deploy@postgres/slackchamp';
 var db = pgp(connectionString);
 
 // add query functions
