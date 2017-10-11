@@ -16,5 +16,6 @@ services:
     environment:
       POSTGRES_USER: deploy
       POSTGRES_DB: slackchamp
+    # this allows for users.sql to build an intial table
     volumes:
       - ./users.sql:/docker-entrypoint-initdb.d/users.sql
