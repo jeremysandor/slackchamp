@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS slackchamp;
-CREATE DATABASE slackchamp;
+-- DROP DATABASE IF EXISTS slackchamp;
+-- CREATE DATABASE slackchamp;
 
-\c slackchamp;
+-- \c slackchamp;
 
 CREATE TABLE users (
   ID SERIAL PRIMARY KEY,

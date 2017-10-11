@@ -6,7 +6,7 @@ const db = require('../queries');
 
 /* GET user profile. */
 router.get('/users', ensureLoggedIn, db.getAllUsers);
-router.get('/users/:id', ensureLoggedIn, db.getUser);
-router.post('/users', db.createUser);
+// router.get('/users/:id', ensureLoggedIn, db.getUser);
+// router.post('/users', db.createUser);
 
 module.exports = router;

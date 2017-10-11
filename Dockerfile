@@ -14,14 +14,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+# DB initialization
+# ADD ./users.sql /docker-entrypoint-initdb.d/
+
 EXPOSE 8080
 CMD [ "npm", "start" ]
-
-
-
-
-#FROM python:3.4-alpine
-#ADD . /code
-#WORKDIR /code
-#RUN pip install -r requirements.txt
-#CMD ["python", "app.py"]

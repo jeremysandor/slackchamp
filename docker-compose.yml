@@ -6,7 +6,7 @@ services:
      - "3000:3000"
     volumes:
       - .:/usr/src/app
-      - /usr/src/app/node_modules
+      # - /usr/src/app/node_modules
     depends_on:
       - postgres
     environment:
@@ -16,3 +16,5 @@ services:
     environment:
       POSTGRES_USER: deploy
       POSTGRES_DB: slackchamp
+    volumes:
+      - ./users.sql:/docker-entrypoint-initdb.d/users.sql
