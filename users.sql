@@ -7,8 +7,19 @@ CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
   name VARCHAR,
   age INTEGER,
-  sex VARCHAR
+  occupation VARCHAR
 );
 
-INSERT INTO users (name, age, sex)
-  VALUES ('Tyler', 31, 'M');
+
+-- create products
+CREATE TABLE products (
+  ID SERIAL PRIMARY KEY,
+  name VARCHAR
+);
+
+INSERT INTO users (name, age, occupation)
+  VALUES ('Tyler', 31, 'Dev');
+
+INSERT INTO products (name) 
+  VALUES ('Shoe')
+  

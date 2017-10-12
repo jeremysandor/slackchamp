@@ -12,6 +12,7 @@ var db = pgp(connectionString);
 function getAllUsers(req, res, next) {
   console.log('req.user', req.user);
   db.any('select * from users')
+  // db.any('select * from products')
     .then(function (data) {
       console.log('DATA', data);
       res.status(200)
