@@ -1,5 +1,17 @@
 version: '3'
 services:
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - /www/public
+    # volumes_from:
+    #   - web
+    links:
+      - web:web
+  
   web:
     build: .
     ports:
@@ -11,6 +23,7 @@ services:
       - postgres
     environment:
       DATABASE_URL: postgres://deploy@postgres/slackchamp
+  
   postgres:
     image: "postgres:9.6.5-alpine"
     environment:

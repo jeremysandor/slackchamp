@@ -4,7 +4,8 @@
 -- \c slackchamp;
 
 CREATE TABLE users (
-  ID SERIAL PRIMARY KEY,
+  ID SERIAL,
+  USER_ID VARCHAR PRIMARY KEY,
   name VARCHAR,
   age INTEGER,
   occupation VARCHAR
@@ -14,12 +15,17 @@ CREATE TABLE users (
 -- create products
 CREATE TABLE products (
   ID SERIAL PRIMARY KEY,
-  name VARCHAR
+  name VARCHAR,
+  user_id VARCHAR REFERENCES users
 );
 
-INSERT INTO users (name, age, occupation)
-  VALUES ('Tyler', 31, 'Dev');
 
-INSERT INTO products (name) 
-  VALUES ('Shoe')
-  
+
+INSERT INTO users (user_id, name, age, occupation)
+  -- VALUES ('uuid123ABC', 'Tyler', 31, 'Dev');
+  VALUES ('uuid345XYZ', 'Jerome', 28, 'Dev');
+
+INSERT INTO products (name, user_id) 
+  -- VALUES ('Shoe', 'uuid123ABC');
+  -- VALUES ('Sock', 'uuid123ABC');
+  VALUES ('Sandle', 'uuid345XYZ');
