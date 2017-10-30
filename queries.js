@@ -9,22 +9,27 @@ var db = pgp(connectionString);
 
 
 // add query functions
-function getAllUsers(req, res, next) {
-  console.log('req.user', req.user);
-  db.any('select * from users')
-  // db.any('select * from products')
-    .then(function (data) {
-      console.log('DATA', data);
-      res.status(200)
-        .json({
-          status: 'success',
-          data: data,
-          message: 'Retrieved all users'
-        });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
+// function getAllUsers(req, res, next) {
+//   console.log('req.user', req.user);
+//   db.any('select * from users')
+//   // db.any('select * from products')
+//     .then(function (data) {
+//       console.log('DATA', data);
+//       res.status(200)
+//         .json({
+//           status: 'success',
+//           data: data,
+//           message: 'Retrieved all users'
+//         });
+//     })
+//     .catch(function (err) {
+//       return next(err);
+//     });
+// }
+
+getAllUsers = async (req, res, next) => {
+  data = await db.any('select * from users')
+  res.status(200).json(data)
 }
 
 // function getAllUsers(req, res, next) {
