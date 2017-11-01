@@ -1,0 +1,38 @@
+# DEV compose file 
+
+version: '3'
+services:
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - /www/public
+    # volumes_from:
+    #   - web
+    links:
+      - web:web
+  
+  web:
+    build: .
+    ports:
+     - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      # - /usr/src/app/node_modules
+    command: node_modules/.bin/nodemon ./bin/www
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://deploy@postgres/slackchamp
+      NODE_ENV: development
+  
+  postgres:
+    image: "postgres:9.6.5-alpine"
+    environment:
+      POSTGRES_USER: deploy
+      POSTGRES_DB: slackchamp
+    # this allows for users.sql to build an intial table
+    volumes:
+      - ./users.sql:/docker-entrypoint-initdb.d/users.sql
