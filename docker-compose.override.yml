@@ -13,7 +13,12 @@ services:
     #   - web
     links:
       - web:web
-  
+  ui:
+    build: ./ui/
+    ports:
+      - "3100:3000"
+    links:
+      - web:web
   web:
     build: .
     ports:
