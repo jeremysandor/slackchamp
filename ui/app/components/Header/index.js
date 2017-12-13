@@ -12,7 +12,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
   render() {
     return (
       <div>
-
+        <div>FOOBAR</div>
         <NavBar>
           <HeaderLink to="/">
             <FormattedMessage {...messages.home} />

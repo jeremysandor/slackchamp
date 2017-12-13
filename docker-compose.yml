@@ -1,24 +1,26 @@
 version: '3'
 services:
-  nginx:
-    restart: always
-    build: ./nginx/
-    ports:
-      - "80:80"
-    volumes:
-      - /www/public
-    # volumes_from:
-    #   - web
-    links:
-      - web:web
-  ui:
-    build: ./ui/
-    ports:
-      - "3100:3000"
-    links:
-      - web:web  
+  # nginx:
+  #   restart: always
+  #   build: ./nginx/
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - /www/public
+  #   # volumes_from:
+  #   #   - web
+  #   links:
+  #     - web:web
+  #   depends_on:
+  #     - web
+  # ui:
+  #   build: ./ui/
+  #   ports:
+  #     - "3100:3000"
+  #   links:
+  #     - web:web  
   web:
-    build: .
+    build: ./api/
     ports:
      - "3000:3000"
     volumes:

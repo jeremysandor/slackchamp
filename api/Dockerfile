@@ -1,7 +1,8 @@
 FROM node:8.6.0-alpine
 
 # Create app directory
-WORKDIR /usr/src/app
+# WORKDIR api/usr/src/app
+WORKDIR usr/src/app
 
 # Install app dependencies
 COPY package.json .

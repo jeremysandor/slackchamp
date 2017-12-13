@@ -67,7 +67,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
               Really
             </H2>
             <p>
-              Simple
+              Simplez
             </p>
           </CenteredSection>
           <Section>
