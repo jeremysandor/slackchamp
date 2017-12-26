@@ -1,7 +1,8 @@
 FROM node:8.6.0-alpine
 
 # Create app directory
-WORKDIR /usr/src/app
+# WORKDIR api/usr/src/app
+WORKDIR usr/src/app
 
 # Install app dependencies
 COPY package.json .
@@ -15,7 +16,7 @@ RUN npm install
 COPY . .
 
 # DB initialization
-# ADD ./users.sql /docker-entrypoint-initdb.d/
+ADD ./users.sql /docker-entrypoint-initdb.d/
 
 EXPOSE 8080
 CMD [ "npm", "start" ]

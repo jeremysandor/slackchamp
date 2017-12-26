@@ -10,8 +10,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const logger = require('../../server/logger');
+// const pkg = require(path.resolve(process.cwd(), 'package.json'));
+console.log('CWD', process.cwd(), path.resolve(process.cwd(), 'package.json'));
 const pkg = require(path.resolve(process.cwd(), 'package.json'));
+// const pkg = require('../../package.json');
+
 const dllPlugin = pkg.dllPlugin;
+// const dllPlugin = null;
 
 const plugins = [
   new webpack.HotModuleReplacementPlugin(), // Tell webpack we want hot reloading
@@ -42,6 +47,8 @@ module.exports = require('./webpack.base.babel')({
   entry: [
     'eventsource-polyfill', // Necessary for hot reloading with IE
     'webpack-hot-middleware/client?reload=true',
+    // 'webpack-hot-middleware/client?http://0.0.0.0:3000/',
+    // 'webpack-dev-server/client?http://0.0.0.0:3000/',
     path.join(process.cwd(), 'app/app.js'), // Start with js/app.js
   ],
 
@@ -49,7 +56,16 @@ module.exports = require('./webpack.base.babel')({
   output: {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
+    publicPath: 'http://0.0.0.0:3000/',
   },
+
+  // devServer: {
+  //   hot: true,
+  // },
+
+  // watchOptions: {
+  //   poll: 1000,
+  // },
 
   // Add development plugins
   plugins: dependencyHandlers().concat(plugins), // eslint-disable-line no-use-before-define

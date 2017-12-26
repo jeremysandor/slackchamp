@@ -2,37 +2,58 @@
 
 version: '3'
 services:
-  nginx:
-    restart: always
-    build: ./nginx/
-    ports:
-      - "80:80"
-    volumes:
-      - /www/public
-    # volumes_from:
-    #   - web
-    links:
-      - web:web
+  # nginx:
+  #   restart: always
+  #   build: ./nginx/
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - /www/public
+  #   # volumes_from:
+  #   #   - web
+  #   links:
+  #     - web:web
+  #   depends_on:
+  #     - web      
+
   ui:
-    build: ./ui/
+    # build: ./ui/
+    image: ui
     ports:
-      - "3100:3000"
-    links:
-      - web:web
+      - "3000:3000"
+    volumes:
+      - ./ui:/ui
+      # - ./ui:/ui
+      # - .:/usr/src
+      # - .:/foo
+      # - $(pwd):/usr/src/app
+      # - .:/usr/src/ui
+
+    # links:
+    #   - web:web
+    # command: ../api/node_modules/.bin/nodemon --watch ui ./ui/server
+    # command: node_modules/.bin/webpack-dev-server --host 0.0.0.0 --inline --content-base .
+    # command: node_modules/.bin/webpack-dev-server --inline --host 0.0.0.0 --port 3000 --history-api-fallback --watch-poll --config internals/webpack/webpack.dev.babel.js
+
   web:
-    build: .
+    build: ./api/
     ports:
-     - "3000:3000"
+     - "3001:3000"
     volumes:
       - .:/usr/src/app
       # - /usr/src/app/node_modules
-    command: node_modules/.bin/nodemon ./bin/www
+    # nodemon for dev - only watch the api directory with --watch
+    command: api/node_modules/.bin/nodemon --watch api ./api/bin/www
     depends_on:
       - postgres
     environment:
       DATABASE_URL: postgres://deploy@postgres/slackchamp
       NODE_ENV: development
-  
+      AUTH0_CLIENT_ID: ariBhQW-sIIhj9oXVSgWDvRlWhoQTAQu
+      AUTH0_DOMAIN: slackchamp.auth0.com
+      AUTH0_CLIENT_SECRET: 7io8_1Lq0dXXnzo0-uxHZ3kI_sLkD6ujxm1GZmSwWt78r1QlK-JGGosUNq6Ifd2N
+      AUTH0_CALLBACK_URL: http://localhost:3001/callback
+
   postgres:
     image: "postgres:9.6.5-alpine"
     environment:
@@ -40,4 +61,15 @@ services:
       POSTGRES_DB: slackchamp
     # this allows for users.sql to build an intial table
     volumes:
-      - ./users.sql:/docker-entrypoint-initdb.d/users.sql
+      - ./api/users.sql:/docker-entrypoint-initdb.d/users.sql
+      # - ./users.sql:/docker-entrypoint-initdb.d/users.sql
+
+
+
+# volumes:
+#   ui:
+#     external: true
+
+# networks:
+#   freedom_net:
+#     external: true
