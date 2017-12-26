@@ -28,8 +28,15 @@ var db = pgp(connectionString);
 // }
 
 getAllUsers = async (req, res, next) => {
-  data = await db.any('select * from users')
-  res.status(200).json(data)
+  console.log('DB', db);
+  try {
+    data = await db.any('select * from users')
+    res.status(200).json(data)
+  } catch (e) {
+    console.log('Error:', e)
+    res.status(400)
+  }
+  
 }
 
 // function getAllUsers(req, res, next) {

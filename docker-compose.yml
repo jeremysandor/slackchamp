@@ -13,29 +13,32 @@ services:
   #     - web:web
   #   depends_on:
   #     - web
-  # ui:
-  #   build: ./ui/
-  #   ports:
-  #     - "3100:3000"
-  #   links:
-  #     - web:web  
-  web:
-    build: ./api/
-    ports:
-     - "3000:3000"
-    volumes:
-      - .:/usr/src/app
-      # - /usr/src/app/node_modules
-    depends_on:
-      - postgres
-    environment:
-      DATABASE_URL: postgres://deploy@postgres/slackchamp
   
-  postgres:
-    image: "postgres:9.6.5-alpine"
-    environment:
-      POSTGRES_USER: deploy
-      POSTGRES_DB: slackchamp
-    # this allows for users.sql to build an intial table
-    volumes:
-      - ./users.sql:/docker-entrypoint-initdb.d/users.sql
+  ui:
+    # build: ./ui/
+    ports:
+      - "3000:3000"
+    # links:
+    #   - web:web  
+      
+  # web:
+  #   build: ./api/
+  #   ports:
+  #    - "3000:3000"
+  #   volumes:
+  #     - .:/usr/src/app
+  #     # - /usr/src/app/node_modules
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     DATABASE_URL: postgres://deploy@postgres/slackchamp
+  
+  # postgres:
+  #   image: "postgres:9.6.5-alpine"
+  #   environment:
+  #     POSTGRES_USER: deploy
+  #     POSTGRES_DB: slackchamp
+  #   # this allows for users.sql to build an intial table
+  #   volumes:
+  #     - ./api/users.sql:/docker-entrypoint-initdb.d/users.sql
+  #     # - ./users.sql:/docker-entrypoint-initdb.d/users.sql

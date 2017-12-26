@@ -43,7 +43,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
   }
 
   render() {
-    console.log('TABLE PROPS', this.props)
+    console.log('TABLE PROPz', this.props)
     const { loading, error, repos } = this.props;
     const reposListProps = {
       loading,
@@ -67,7 +67,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
               Really
             </H2>
             <p>
-              Simplez
+              Simple
             </p>
           </CenteredSection>
           <Section>

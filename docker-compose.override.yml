@@ -15,20 +15,35 @@ services:
   #     - web:web
   #   depends_on:
   #     - web      
-  # ui:
-  #   build: ./ui/
-  #   ports:
-  #     - "3100:3000"
-  #   links:
-  #     - web:web
+
+  ui:
+    # build: ./ui/
+    image: ui
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./ui:/ui
+      # - ./ui:/ui
+      # - .:/usr/src
+      # - .:/foo
+      # - $(pwd):/usr/src/app
+      # - .:/usr/src/ui
+
+    # links:
+    #   - web:web
+    # command: ../api/node_modules/.bin/nodemon --watch ui ./ui/server
+    # command: node_modules/.bin/webpack-dev-server --host 0.0.0.0 --inline --content-base .
+    # command: node_modules/.bin/webpack-dev-server --inline --host 0.0.0.0 --port 3000 --history-api-fallback --watch-poll --config internals/webpack/webpack.dev.babel.js
+
   web:
     build: ./api/
     ports:
-     - "3000:3000"
+     - "3001:3000"
     volumes:
       - .:/usr/src/app
       # - /usr/src/app/node_modules
-    command: api/node_modules/.bin/nodemon ./api/bin/www
+    # nodemon for dev - only watch the api directory with --watch
+    command: api/node_modules/.bin/nodemon --watch api ./api/bin/www
     depends_on:
       - postgres
     environment:
@@ -37,7 +52,8 @@ services:
       AUTH0_CLIENT_ID: ariBhQW-sIIhj9oXVSgWDvRlWhoQTAQu
       AUTH0_DOMAIN: slackchamp.auth0.com
       AUTH0_CLIENT_SECRET: 7io8_1Lq0dXXnzo0-uxHZ3kI_sLkD6ujxm1GZmSwWt78r1QlK-JGGosUNq6Ifd2N
-  
+      AUTH0_CALLBACK_URL: http://localhost:3001/callback
+
   postgres:
     image: "postgres:9.6.5-alpine"
     environment:
@@ -48,3 +64,12 @@ services:
       - ./api/users.sql:/docker-entrypoint-initdb.d/users.sql
       # - ./users.sql:/docker-entrypoint-initdb.d/users.sql
 
+
+
+# volumes:
+#   ui:
+#     external: true
+
+# networks:
+#   freedom_net:
+#     external: true

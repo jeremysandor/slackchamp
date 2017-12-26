@@ -16,7 +16,7 @@ RUN npm install
 COPY . .
 
 # DB initialization
-# ADD ./users.sql /docker-entrypoint-initdb.d/
+ADD ./users.sql /docker-entrypoint-initdb.d/
 
 EXPOSE 8080
 CMD [ "npm", "start" ]

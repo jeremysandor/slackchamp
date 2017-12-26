@@ -81,6 +81,7 @@ const render = (messages) => {
   );
 };
 
+console.log('MODULE.HOTs', module.hot)
 if (module.hot) {
   // Hot reloadable React components and translation json files
   // modules.hot.accept does not accept dynamic dependencies,
