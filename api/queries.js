@@ -1,105 +1,89 @@
-var pgp = require('pg-promise')();
-// var connectionString = 'postgres://localhost:5432/slackchamp';
-var connectionString = 'postgres://deploy@postgres/slackchamp';
-var db = pgp(connectionString);
+const pgp = require('pg-promise')();
 
-// const Sequelize = require("sequelize");
-// const sequelize = new Sequelize('postgres://deploy@postgres/slackchamp');
-
-
-
-// add query functions
-// function getAllUsers(req, res, next) {
-//   console.log('req.user', req.user);
-//   db.any('select * from users')
-//   // db.any('select * from products')
-//     .then(function (data) {
-//       console.log('DATA', data);
-//       res.status(200)
-//         .json({
-//           status: 'success',
-//           data: data,
-//           message: 'Retrieved all users'
-//         });
-//     })
-//     .catch(function (err) {
-//       return next(err);
-//     });
-// }
-
-getAllUsers = async (req, res, next) => {
-  console.log('DB', db);
-  try {
-    data = await db.any('select * from users')
-    res.status(200).json(data)
-  } catch (e) {
-    console.log('Error:', e)
-    res.status(400)
+class Query {
+  constructor(opts={}) {
+    this.connectionString = 'postgres://deploy@postgres/slackchamp';
+    this.db = pgp(this.connectionString);
   }
-  
+
+  async getAllUsers(req, res, next) {
+    try {
+      const data = await this.db.any('select * from users');
+      res.status(200).json(data)
+    } catch (e) {
+      console.log('Error:', e)
+      res.status(400)
+    }    
+  }
+
+  async getUser (req, res, next) {
+    const {id} = req.params;
+    const userId = parseInt(id);
+    
+    try {
+      const data = await this.db.one('select * from users where id = $1', userID);
+      res.status(200).json(data)
+    } catch (e) {
+      console.log('Error:', e)
+      res.status(400)
+    }
+  }
+
+  async createUser (req, res, next) {
+    try {
+      this.db.none('insert into users(name, age, sex)' + 'values(${name}, ${age}, ${sex})', req.body)
+      res.status(200).json(data)
+    } catch (e) {
+      console.log('Error:', e)
+      res.status(400)
+    }
+  }  
+
+
 }
 
-// function getAllUsers(req, res, next) {
-//   // const User = sequelize.define('user', {
-//   //   firstName: {
-//   //     type: Sequelize.STRING
-//   //   },
-//   //   lastName: {
-//   //     type: Sequelize.STRING
-//   //   }
-//   // });
+module.exports = Query;
 
-//   // // force: true will drop the table if it already exists
-//   // User.sync({force: false}).then(() => {
-//   //   // Table created
-//   //   return User.create({
-//   //     firstName: 'John',
-//   //     lastName: 'Hancock'
-//   //   });
-//   // });
-
-//   User.findAll().then(users => {
-//     console.log(users);
-//     res.status(200);
-//   })
+// const getAllUsers = async (req, res, next) => {
+//   console.log('DB', db);
+//   try {
+//     const data = await db.any('select * from users');
+//     res.status(200).json(data)
+//   } catch (e) {
+//     console.log('Error:', e)
+//     res.status(400)
+//   }
+  
 // }
 
-// function getUser(req, res, next) {
-//   console.log('req.user', req.user);
-//   userID = parseInt(req.params.id);
-//   db.one('select * from users where id = $1', userID)
-//     .then(function (data) {
-//       res.status(200)
-//         .json({
-//           status: 'success',
-//           data: data,
-//           message: 'Retrieved one user'
-//         });
-//     })
-//     .catch(function (err) {
-//       return next(err);
-//     });
+// const getUser = async (req, res, next) => {
+//   const {id} = req.params;
+//   const userId = parseInt(id);
+  
+//   try {
+//     const data = await db.one('select * from users where id = $1', userID);
+//     res.status(200).json(data)
+//   } catch (e) {
+//     console.log('Error:', e)
+//     res.status(400)
+//   }
 // }
 
-// function createUser(req, res, next) {
-//   console.log('CREATE USER req.body', req.body);
-//   db.none('insert into users(name, age, sex)' + 'values(${name}, ${age}, ${sex})', req.body)
-//     .then(function() {
-//       res.status(200)
-//         .json({
-//           status: 'success',
-//           message: 'Created user'
-//         });
-//     })
-//     .catch(function (err) {
-//       return next(err);
-//     });
+// const createUser = async (req, res, next) => {
+//   try {
+//     db.none('insert into users(name, age, sex)' + 'values(${name}, ${age}, ${sex})', req.body)
+//     res.status(200).json(data)
+//   } catch (e) {
+//     console.log('Error:', e)
+//     res.status(400)
+//   }
 // }
 
-module.exports = {
-  getAllUsers: getAllUsers
-  // getUser: getUser,
-  // createUser: createUser
-  // updateUser: updateUser,
-  // removeUser: removeUser
-};
+
+// module.exports = {
+//   getAllUsers: getAllUsers
+//   // getUser: getUser,
+//   // createUser: createUser
+//   // updateUser: updateUser,
+//   // removeUser: removeUser
+// };

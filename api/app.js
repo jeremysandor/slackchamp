@@ -14,7 +14,7 @@ dotenv.load();
 
 const routes = require('./routes/index');
 const user = require('./routes/user');
-const users = require('./routes/users');
+const api = require('./routes/api');
 
 // This will configure Passport to use Auth0
 console.log('process.env', process.env)
@@ -91,7 +91,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', routes);
-app.use('/api', users);
+app.use('/api', api);
 app.use('/user', user);
 
 
