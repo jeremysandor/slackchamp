@@ -11,31 +11,32 @@ class Game extends Postgres {
       const data = await super.getConnection().any('select * from games');
       res.status(200).json(data)
     } catch (e) {
-      console.log('Error:', e)
-      res.status(400)
+      res.status(400);
+      res.json({ok: false, error: e.message});
     }    
   }
 
-  async getUser (req, res, next) {
+  async getGame (req, res, next) {
     const {id} = req.params;
-    const userId = parseInt(id);
+    const gameId = parseInt(id);
     
     try {
-      const data = await super.getConnection().one('select * from users where id = $1', userID);
+      const data = await super.getConnection().one('select * from games where id = $1', gameId);
       res.status(200).json(data)
     } catch (e) {
-      console.log('Error:', e)
-      res.status(400)
+      res.status(400);
+      res.json({ok: false, error: e.message});
     }
   }
 
-  async createUser (req, res, next) {
+  async createGame (req, res, next) {
+    console.log('req.body', req.body);
     try {
-      super.getConnection().none('insert into users(name, age, sex)' + 'values(${name}, ${age}, ${sex})', req.body)
+      const data = await super.getConnection().none('insert into games(roadteam, hometeam, line, total, side, date)' + 'values(${roadteam}, ${hometeam}, ${line}, ${total}, ${side}, ${date})', req.body)
       res.status(200).json(data)
     } catch (e) {
-      console.log('Error:', e)
-      res.status(400)
+      res.status(400);
+      res.json({ok: false, error: e.message});
     }
   }  
 

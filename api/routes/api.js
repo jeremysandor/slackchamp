@@ -15,5 +15,7 @@ router.get('/users', users.getUsers.bind(users));
 
 const games = new gameQueries;
 router.get('/games', games.getGames.bind(games));
+router.get('/games/:id', games.getGame.bind(games));
+router.post('/games', games.createGame.bind(games));
 
 module.exports = router;
