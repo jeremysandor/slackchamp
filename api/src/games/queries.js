@@ -8,7 +8,7 @@ class Game extends Postgres {
 
   async getGames(req, res, next) {
     try {
-      const data = await super.getConnection().any('select * from users');
+      const data = await super.getConnection().any('select * from games');
       res.status(200).json(data)
     } catch (e) {
       console.log('Error:', e)

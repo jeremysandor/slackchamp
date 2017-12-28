@@ -61,7 +61,7 @@ services:
       POSTGRES_DB: slackchamp
     # this allows for users.sql to build an intial table
     volumes:
-      - ./api/users.sql:/docker-entrypoint-initdb.d/users.sql
+      - ./api/bin/init.sql:/docker-entrypoint-initdb.d/init.sql
       # - ./users.sql:/docker-entrypoint-initdb.d/users.sql
 
 
