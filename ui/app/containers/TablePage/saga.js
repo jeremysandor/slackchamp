@@ -19,11 +19,14 @@ export function* getRepos() {
   const username = yield select(makeSelectUsername());
   const awayteam = yield select(makeSelectAwayTeam());
 
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
+  // const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
+  const requestURL = 'http://localhost:3001/api/games';
+  // const requestURL = 'http://web:3001/api/games';
 
   try {
     // Call our request helper (see 'utils/request')
     const repos = yield call(request, requestURL);
+    console.log('repos', repos);
     yield put(reposLoaded(repos, username));
   } catch (err) {
     yield put(repoLoadingError(err));

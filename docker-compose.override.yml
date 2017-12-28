@@ -29,8 +29,8 @@ services:
       # - $(pwd):/usr/src/app
       # - .:/usr/src/ui
 
-    # links:
-    #   - web:web
+    links:
+      - web:web
     # command: ../api/node_modules/.bin/nodemon --watch ui ./ui/server
     # command: node_modules/.bin/webpack-dev-server --host 0.0.0.0 --inline --content-base .
     # command: node_modules/.bin/webpack-dev-server --inline --host 0.0.0.0 --port 3000 --history-api-fallback --watch-poll --config internals/webpack/webpack.dev.babel.js
