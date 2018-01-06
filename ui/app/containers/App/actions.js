@@ -16,10 +16,58 @@
  */
 
 import {
+  LOAD_GAMES,
+  LOAD_GAMES_SUCCESS,
+  LOAD_GAMES_ERROR,  
   LOAD_REPOS,
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS_ERROR,
 } from './constants';
+
+
+/**
+ * Load the games, this action starts the request saga
+ *
+ * @return {object} An action object with a type of LOAD_GAMES
+ */
+export function loadGames() {
+  return {
+    type: LOAD_GAMES,
+  };
+}
+
+
+/**
+ * Dispatched when the repositories are loaded by the request saga
+ *
+ * @param  {array} repos The game data
+ *
+ * @return {object}      An action object with a type of LOAD_GAMES_SUCCESS passing the games
+ */
+export function gamesLoaded(games) {
+  return {
+    type: LOAD_GAMES_SUCCESS,
+    games,
+  };
+}
+
+
+/**
+ * Dispatched when loading the games fails
+ *
+ * @param  {object} error The error
+ *
+ * @return {object}       An action object with a type of LOAD_GAMES_ERROR passing the error
+ */
+export function gameLoadingError(error) {
+  return {
+    type: LOAD_GAMES_ERROR,
+    error,
+  };
+}
+
+
+
 
 /**
  * Load the repositories, this action starts the request saga

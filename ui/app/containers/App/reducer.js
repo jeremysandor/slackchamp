@@ -13,6 +13,9 @@
 import { fromJS } from 'immutable';
 
 import {
+  LOAD_GAMES,
+  LOAD_GAMES_SUCCESS,
+  LOAD_GAMES_ERROR,
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
   LOAD_REPOS_ERROR,
@@ -26,10 +29,25 @@ const initialState = fromJS({
   userData: {
     repositories: false,
   },
+  games: false,
 });
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
+    case LOAD_GAMES:
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .set('games', false);
+    case LOAD_GAMES_SUCCESS:
+      return state
+        .set('games', action.games)
+        .set('loading', false);
+    case LOAD_GAMES_ERROR:
+      return state
+        .set('error', action.error)
+        .set('loading', false);
+
     case LOAD_REPOS:
       return state
         .set('loading', true)

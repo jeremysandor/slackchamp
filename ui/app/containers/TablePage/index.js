@@ -14,16 +14,17 @@ import { createStructuredSelector } from 'reselect';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
+import { makeSelectGames, makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
+import GamesList from 'components/GamesList';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { loadRepos } from '../App/actions';
+import { loadRepos, loadGames } from '../App/actions';
 import { changeUsername } from './actions';
 import { changeAwayTeam } from './actions';
 import { makeSelectUsername } from './selectors';
@@ -44,11 +45,11 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
 
   render() {
     console.log('TABLE PROPz', this.props)
-    const { loading, error, repos } = this.props;
-    const reposListProps = {
+    const { loading, error, games } = this.props;
+    const gamesListProps = {
       loading,
       error,
-      repos,
+      games,
     };
 
     // console.log('reposListProps', reposListProps)
@@ -73,10 +74,6 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
           <Section>
             <Form onSubmit={this.props.onSubmitForm}>
               <label htmlFor="username">
-                <FormattedMessage {...messages.trymeMessage} />
-                <AtPrefix>
-                  <FormattedMessage {...messages.trymeAtPrefix} />
-                </AtPrefix>
                 <Input
                   id="username"
                   type="text"
@@ -97,7 +94,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
               </label>
               <input type="submit" />
             </Form>
-            <ReposList {...reposListProps} />
+            <GamesList {...gamesListProps} />
           </Section>
         </div>
       </article>
@@ -111,7 +108,7 @@ TablePage.propTypes = {
     PropTypes.object,
     PropTypes.bool,
   ]),
-  repos: PropTypes.oneOfType([
+  games: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.bool,
   ]),
@@ -129,13 +126,13 @@ export function mapDispatchToProps(dispatch) {
     onSubmitForm: (evt) => {
       console.log('hey');
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
+      dispatch(loadGames());
     },
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  repos: makeSelectRepos(),
+  games: makeSelectGames(),
   username: makeSelectUsername(),
   awayTeam: makeSelectAwayTeam(),
   loading: makeSelectLoading(),

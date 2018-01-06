@@ -3,8 +3,8 @@
  */
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import { LOAD_GAMES } from 'containers/App/constants';
+import { gamesLoaded, gameLoadingError } from 'containers/App/actions';
 
 import request from 'utils/request';
 // import { makeSelectUsername } from 'containers/HomePage/selectors';
@@ -12,9 +12,9 @@ import { makeSelectUsername } from './selectors';
 import { makeSelectAwayTeam } from './selectors';
 
 /**
- * Github repos request/response handler
+ * Games request/response handler
  */
-export function* getRepos() {
+export function* getGames() {
   // Select username from store
   const username = yield select(makeSelectUsername());
   const awayteam = yield select(makeSelectAwayTeam());
@@ -25,21 +25,21 @@ export function* getRepos() {
 
   try {
     // Call our request helper (see 'utils/request')
-    const repos = yield call(request, requestURL);
-    console.log('repos', repos);
-    yield put(reposLoaded(repos, username));
+    const games = yield call(request, requestURL);
+    console.log('games', games);
+    yield put(gamesLoaded(games));
   } catch (err) {
-    yield put(repoLoadingError(err));
+    yield put(gameLoadingError(err));
   }
 }
 
 /**
  * Root saga manages watcher lifecycle
  */
-export default function* githubDataz() {
-  // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
+export default function* gameData() {
+  // Watches for LOAD_GAMES actions and calls getGames when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
-  yield takeLatest(LOAD_REPOS, getRepos);
+  yield takeLatest(LOAD_GAMES, getGames);
 }

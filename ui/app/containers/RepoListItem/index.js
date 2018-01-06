@@ -19,6 +19,7 @@ import Wrapper from './Wrapper';
 
 export class RepoListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
+    console.log('containers/RepoListItem item', this.props);
     const item = this.props.item;
     let nameprefix = '';
 
