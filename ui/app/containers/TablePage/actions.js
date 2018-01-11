@@ -18,26 +18,64 @@
 import {
   CHANGE_USERNAME,
   CHANGE_AWAYTEAM,
+  CHANGE_HOMETEAM,
+  CHANGE_LINE,
+  CHANGE_SIDE,
+  CHANGE_TOTAL,
+  CHANGE_DATE,
 } from './constants';
 
 /**
  * Changes the input field of the form
  *
- * @param  {name} name The new text of the input field
+ * @param  {team} team The new text of the input field
  *
- * @return {object}    An action object with a type of CHANGE_USERNAME
+ * @return {object}    An action object with a type of CHANGE_AWAYTEAM
  */
-export function changeUsername(name) {
-  return {
-    type: CHANGE_USERNAME,
-    name,
-  };
-}
-
 export function changeAwayTeam(team) {
   console.log('TEAM', team);
   return {
     type: CHANGE_AWAYTEAM,
     team, 
+  };
+}
+
+export function changeHomeTeam(team) {
+  console.log('TEAM', team);
+  return {
+    type: CHANGE_HOMETEAM,
+    team, 
+  };
+}
+
+export function changeLine(line) {
+  console.log('LINE', line);
+  return {
+    type: CHANGE_LINE,
+    line, 
+  };
+}
+
+export function changeSide(side) {
+  console.log('SIDE', side);
+  return {
+    type: CHANGE_SIDE,
+    side, 
+  };
+}
+
+export function changeTotal(total) {
+  console.log('TOTAL', total);
+  return {
+    type: CHANGE_TOTAL,
+    total, 
+  };
+}
+
+export function changeDate(date) {
+  console.log('DATE', date);
+  return {
+    type: CHANGE_DATE,
+    date, 
   };
 }

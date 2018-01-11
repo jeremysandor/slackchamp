@@ -11,3 +11,8 @@
 
 export const CHANGE_USERNAME = 'boilerplate/Home/CHANGE_USERNAME';
 export const CHANGE_AWAYTEAM = 'boilerplate/Home/CHANGE_AWAYTEAM';
+export const CHANGE_HOMETEAM = 'boilerplate/Home/CHANGE_HOMETEAM';
+export const CHANGE_LINE = 'boilerplate/Home/CHANGE_LINE';
+export const CHANGE_SIDE = 'boilerplate/Home/CHANGE_SIDE';
+export const CHANGE_TOTAL = 'boilerplate/Home/CHANGE_TOTAL';
+export const CHANGE_DATE = 'boilerplate/Home/CHANGE_DATE';
