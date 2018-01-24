@@ -14,31 +14,37 @@ services:
   #   depends_on:
   #     - web
   
-  ui:
-    # build: ./ui/
-    ports:
-      - "3000:3000"
+  # ui:
+  #   build: ./ui/
+  #   ports:
+  #     - "3000:3000"
     # links:
     #   - web:web  
       
-  # web:
-  #   build: ./api/
-  #   ports:
-  #    - "3000:3000"
-  #   volumes:
-  #     - .:/usr/src/app
-  #     # - /usr/src/app/node_modules
-  #   depends_on:
-  #     - postgres
-  #   environment:
-  #     DATABASE_URL: postgres://deploy@postgres/slackchamp
+  web:
+    image: "jeremysandor/slackchamp_web:latest"
+    build: ./api/
+    ports:
+     - "3001:3000"      
+    volumes:
+      - .:/usr/src/app
+      # - /usr/src/app/node_modules
+    # depends_on:
+    #   - postgres
+    environment:
+      DATABASE_URL: postgres://deploy@postgres/slackchamp
   
-  # postgres:
-  #   image: "postgres:9.6.5-alpine"
-  #   environment:
-  #     POSTGRES_USER: deploy
-  #     POSTGRES_DB: slackchamp
-  #   # this allows for users.sql to build an intial table
-  #   volumes:
-  #     - ./api/users.sql:/docker-entrypoint-initdb.d/users.sql
-  #     # - ./users.sql:/docker-entrypoint-initdb.d/users.sql
+  postgres:
+    image: "postgres:9.6.5-alpine"
+    environment:
+      POSTGRES_USER: deploy
+      POSTGRES_DB: slackchamp
+    # this allows for users.sql to build an intial table
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./api/bin/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # - ./api/users.sql:/docker-entrypoint-initdb.d/users.sql
+      # - ./users.sql:/docker-entrypoint-initdb.d/users.sql
+
+volumes:
+  db-data:

@@ -17,8 +17,8 @@ services:
   #     - web      
 
   ui:
-    # build: ./ui/
-    image: ui
+    build: ./ui/
+    # image: ui
     ports:
       - "3000:3000"
     volumes:
@@ -62,6 +62,7 @@ services:
     # this allows for users.sql to build an intial table
     volumes:
       - ./api/bin/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # - ./api/users.sql:/docker-entrypoint-initdb.d/users.sql
       # - ./users.sql:/docker-entrypoint-initdb.d/users.sql
 
 
