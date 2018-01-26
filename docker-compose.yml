@@ -25,14 +25,26 @@ services:
     image: "jeremysandor/slackchamp_web:latest"
     build: ./api/
     ports:
-     - "3001:3000"      
-    volumes:
-      - .:/usr/src/app
+     - "3001:3000" 
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == worker
+      restart_policy:
+        condition: any
+    # volumes:
+    #   - .:/usr/src/app
       # - /usr/src/app/node_modules
     # depends_on:
     #   - postgres
     environment:
       DATABASE_URL: postgres://deploy@postgres/slackchamp
+      NODE_ENV: production
+      AUTH0_CLIENT_ID: ariBhQW-sIIhj9oXVSgWDvRlWhoQTAQu
+      AUTH0_DOMAIN: slackchamp.auth0.com
+      AUTH0_CLIENT_SECRET: 7io8_1Lq0dXXnzo0-uxHZ3kI_sLkD6ujxm1GZmSwWt78r1QlK-JGGosUNq6Ifd2N
+      AUTH0_CALLBACK_URL: http://localhost:3001/callback
   
   postgres:
     image: "postgres:9.6.5-alpine"
@@ -42,7 +54,7 @@ services:
     # this allows for users.sql to build an intial table
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./api/bin/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # - ./api/bin/init.sql:/docker-entrypoint-initdb.d/init.sql
       # - ./api/users.sql:/docker-entrypoint-initdb.d/users.sql
       # - ./users.sql:/docker-entrypoint-initdb.d/users.sql
 
