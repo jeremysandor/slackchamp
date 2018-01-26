@@ -1,6 +1,6 @@
 # DEV compose file 
 
-version: '3'
+version: '3.3'
 services:
   # nginx:
   #   restart: always
@@ -38,7 +38,7 @@ services:
   web:
     build: ./api/
     ports:
-     - "3001:3000"
+     - "3001:3001"
     volumes:
       - .:/usr/src/app
       # - /usr/src/app/node_modules

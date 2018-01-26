@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 services:
   # nginx:
   #   restart: always
@@ -24,8 +24,12 @@ services:
   web:
     image: "jeremysandor/slackchamp_web:latest"
     build: ./api/
+    # ports:
+    #  - "3001:3000"
     ports:
-     - "3001:3000" 
+      - target: 3001
+        published: 3001
+        mode: ingress
     deploy:
       replicas: 1
       placement:
