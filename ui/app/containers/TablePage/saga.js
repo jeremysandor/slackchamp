@@ -1,7 +1,7 @@
 /**
  * Gets the repositories of the user from Github
  */
-import config from '../../../config';
+// import config from '../../../config';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { LOAD_GAMES } from 'containers/App/constants';
 import { gamesLoaded, gameLoadingError } from 'containers/App/actions';
@@ -30,9 +30,9 @@ export function* getGames() {
   const date = yield select(makeSelectDate());
 
   // const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-  console.log('config', config);
-  const requestURL = `${config.api_endpoint}/api/games`;
-  // const requestURL = 'http://localhost:3001/api/games';
+  // console.log('config', config);
+  // const requestURL = `${config.api_endpoint}/api/games`;
+  const requestURL = 'http://localhost:3001/api/games';
   console.log('requestURL', requestURL);
   // const requestURL = 'http://web:3001/api/games';
 
