@@ -26,6 +26,9 @@ services:
           - node.role == worker
       restart_policy:
         condition: any
+    configs:
+      - source: ui_config_js
+        target: /ui/config.js
 
   web:
     image: "jeremysandor/slackchamp_web:latest"
@@ -56,6 +59,10 @@ services:
       POSTGRES_DB: slackchamp
     volumes:
       - db-data:/var/lib/postgresql/data
+
+configs:
+  ui_config_js:
+    file: ./configs/ui/prod/config.js 
 
 volumes:
   db-data:

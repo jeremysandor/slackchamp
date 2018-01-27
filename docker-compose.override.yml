@@ -25,6 +25,9 @@ services:
       - ./ui:/ui
     links:
       - web:web
+    configs:
+      - source: ui_config_js
+        target: /ui/config.js
 
   web:
     image: "jeremysandor/slackchamp_web:latest"
@@ -55,7 +58,10 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
+configs:
+  ui_config_js:
+    file: ./configs/ui/dev/config.js      
+
 volumes:
   db-data:
-
 
