@@ -19,22 +19,12 @@ services:
   ui:
     image: "jeremysandor/slackchamp_ui:latest"
     build: ./ui/
-    # image: ui
     ports:
       - "3000:3000"
     volumes:
       - ./ui:/ui
-      # - ./ui:/ui
-      # - .:/usr/src
-      # - .:/foo
-      # - $(pwd):/usr/src/app
-      # - .:/usr/src/ui
-
     links:
       - web:web
-    # command: ../api/node_modules/.bin/nodemon --watch ui ./ui/server
-    # command: node_modules/.bin/webpack-dev-server --host 0.0.0.0 --inline --content-base .
-    # command: node_modules/.bin/webpack-dev-server --inline --host 0.0.0.0 --port 3000 --history-api-fallback --watch-poll --config internals/webpack/webpack.dev.babel.js
 
   web:
     image: "jeremysandor/slackchamp_web:latest"
@@ -57,22 +47,15 @@ services:
       AUTH0_CALLBACK_URL: http://localhost:3001/callback
 
   postgres:
-    image: "postgres:9.6.5-alpine"
+    image: "jeremysandor/slackchamp_db:latest"
+    build: ./db/
     environment:
       POSTGRES_USER: deploy
       POSTGRES_DB: slackchamp
-    # this allows for users.sql to build an intial table
     volumes:
-      - ./api/bin/init.sql:/docker-entrypoint-initdb.d/init.sql
-      # - ./api/users.sql:/docker-entrypoint-initdb.d/users.sql
-      # - ./users.sql:/docker-entrypoint-initdb.d/users.sql
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
 
 
-
-# volumes:
-#   ui:
-#     external: true
-
-# networks:
-#   freedom_net:
-#     external: true

@@ -26,16 +26,12 @@ services:
           - node.role == worker
       restart_policy:
         condition: any
-              
+
   web:
     image: "jeremysandor/slackchamp_web:latest"
     build: ./api/
     ports:
      - "3001:3001"
-    # ports:
-    #   - target: 3001
-    #     published: 3001
-    #     mode: ingress
     deploy:
       replicas: 1
       placement:
@@ -43,11 +39,6 @@ services:
           - node.role == worker
       restart_policy:
         condition: any
-    # volumes:
-    #   - .:/usr/src/app
-      # - /usr/src/app/node_modules
-    # depends_on:
-    #   - postgres
     environment:
       DATABASE_URL: postgres://deploy@postgres/slackchamp
       NODE_ENV: production
@@ -57,16 +48,14 @@ services:
       AUTH0_CALLBACK_URL: http://localhost:3001/callback
   
   postgres:
-    image: "postgres:9.6.5-alpine"
+    image: "jeremysandor/slackchamp_db:latest"
+    build: ./db/
+    restart: always
     environment:
       POSTGRES_USER: deploy
       POSTGRES_DB: slackchamp
-    # this allows for users.sql to build an intial table
     volumes:
       - db-data:/var/lib/postgresql/data
-      # - ./api/bin/init.sql:/docker-entrypoint-initdb.d/init.sql
-      # - ./api/users.sql:/docker-entrypoint-initdb.d/users.sql
-      # - ./users.sql:/docker-entrypoint-initdb.d/users.sql
 
 volumes:
   db-data:
