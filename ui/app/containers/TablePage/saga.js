@@ -29,10 +29,14 @@ export function* getGames() {
   const total = yield select(makeSelectTotal());
   const date = yield select(makeSelectDate());
 
+  let requestURL = 'http://localhost:3001/api/games';
+  if (process.env.NODE_ENV === 'production') {
+    requestURL = 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001/api/games';
+  }
   // const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-  // console.log('config', config);
-  // const requestURL = `${config.api_endpoint}/api/games`;
-  const requestURL = 'http://localhost:3001/api/games';
+  // console.log('process.env UI', process.env, process.env.API_URL);
+  // const requestURL = `${process.env.API_URL}/api/games`;
+  // const requestURL = 'http://localhost:3001/api/games';
   console.log('requestURL', requestURL);
   // const requestURL = 'http://web:3001/api/games';
 

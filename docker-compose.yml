@@ -29,6 +29,9 @@ services:
     configs:
       - source: ui_config_js
         target: /ui/config.js
+    environment:
+      API_URL: 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001'
+      NODE_ENV: production
 
   web:
     image: "jeremysandor/slackchamp_web:latest"

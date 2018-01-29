@@ -28,6 +28,9 @@ services:
     configs:
       - source: ui_config_js
         target: /ui/config.js
+    environment:
+      API_URL: 'http://localhost:3001'
+      NODE_ENV: development
 
   web:
     image: "jeremysandor/slackchamp_web:latest"
