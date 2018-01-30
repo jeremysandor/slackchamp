@@ -19,7 +19,7 @@ import { makeSelectDate } from './selectors';
 /**
  * Games request/response handler
  */
-export function* getGames() {
+export function* createGames() {
   // Select username from store
   const username = yield select(makeSelectUsername());
   const awayteam = yield select(makeSelectAwayTeam());
@@ -33,10 +33,6 @@ export function* getGames() {
   if (process.env.NODE_ENV === 'production') {
     requestURL = 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001/api/games';
   }
-  // const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-  // console.log('process.env UI', process.env, process.env.API_URL);
-  // const requestURL = `${process.env.API_URL}/api/games`;
-  // const requestURL = 'http://localhost:3001/api/games';
   console.log('requestURL', requestURL);
   // const requestURL = 'http://web:3001/api/games';
 
@@ -72,9 +68,9 @@ export function* getGames() {
  * Root saga manages watcher lifecycle
  */
 export default function* gameData() {
-  // Watches for LOAD_GAMES actions and calls getGames when one comes in.
+  // Watches for LOAD_GAMES actions and calls createGames when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
-  yield takeLatest(LOAD_GAMES, getGames);
+  yield takeLatest(LOAD_GAMES, createGames);
 }

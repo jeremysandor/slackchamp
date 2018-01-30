@@ -11,6 +11,9 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -45,6 +48,7 @@ import { makeSelectDate } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+
 export class TablePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
    * when initial state username is not null, submit the form to load repos
@@ -65,9 +69,6 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
       games,
     };
 
-    // console.log('reposListProps', reposListProps)
-
-    
 
     return (
       <article>
@@ -129,6 +130,8 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
                 />
               </label>     
 
+              <DatePicker selected={this.props.date} onChange={this.props.onChangeDate} showTimeSelect timeFormat="HH:mm" dateFormat="LLL"/>
+
               <label htmlFor="date">
                 <Input
                   id="date"
@@ -137,8 +140,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
                   value={this.props.date}
                   onChange={this.props.onChangeDate}
                 />
-              </label>     
-
+              </label>  
 
               <input type="submit" value="Save"/>
             </Form>
@@ -149,6 +151,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
     );
   }
 }
+
 
 TablePage.propTypes = {
   loading: PropTypes.bool,
@@ -166,7 +169,7 @@ TablePage.propTypes = {
   line: PropTypes.string,
   side: PropTypes.string,
   total: PropTypes.string,
-  date: PropTypes.string,
+  date: PropTypes.object,
   onChangeAwayTeam: PropTypes.func,
   onChangeHomeTeam: PropTypes.func,
   onChangeLine: PropTypes.func,
@@ -182,9 +185,9 @@ export function mapDispatchToProps(dispatch) {
     onChangeLine: (evt) => dispatch(changeLine(evt.target.value)),
     onChangeSide: (evt) => dispatch(changeSide(evt.target.value)),
     onChangeTotal: (evt) => dispatch(changeTotal(evt.target.value)),
-    onChangeDate: (evt) => dispatch(changeDate(evt.target.value)),
+    // onChangeDate: (evt) => dispatch(changeDate(evt.target.value)),
+    onChangeDate: (date) => dispatch(changeDate(date)),
     onSubmitForm: (evt) => {
-      console.log('hey');
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadGames());
     },
