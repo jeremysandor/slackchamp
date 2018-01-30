@@ -1,7 +1,7 @@
 /*
- * HomePage
+ * Admin page
  *
- * This is the first thing users see of our App, at the '/' route
+ * This is the admin page, at the /admin route
  */
 
 import React from 'react';
@@ -72,18 +72,10 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
     return (
       <article>
         <Helmet>
-          <title>Table Page</title>
-          <meta name="description" content="A React.js Boilerplate application homepage" />
+          <title>Admin</title>
+          <meta name="description" content="Admin Page" />
         </Helmet>
         <div>
-          <CenteredSection>
-            <H2>
-              Really
-            </H2>
-            <p>
-              Simple
-            </p>
-          </CenteredSection>
           <Section>
             <Form onSubmit={this.props.onSubmitForm}>
               

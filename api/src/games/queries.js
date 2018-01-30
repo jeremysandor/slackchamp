@@ -8,7 +8,7 @@ class Game extends Postgres {
 
   async getGames(req, res, next) {
     try {
-      const data = await super.getConnection().any('select * from games');
+      const data = await super.getConnection().any('select * from games ORDER BY date DESC');
       res.status(200).json(data)
     } catch (e) {
       res.status(400);
@@ -32,7 +32,24 @@ class Game extends Postgres {
   async createGame (req, res, next) {
     console.log('req.body', req.body);
     try {
-      const data = await super.getConnection().none('insert into games(roadteam, hometeam, line, total, side, date)' + 'values(${roadteam}, ${hometeam}, ${line}, ${total}, ${side}, ${date})', req.body)
+      let {roadteam, hometeam, line, side, total, date} = req.body;
+      if (line == '') {
+        line = null;
+      }
+      if (total == '') {
+        total = null;
+      }
+      const body = {
+        roadteam: roadteam,
+        hometeam: hometeam,
+        line: line,
+        side: side,
+        total: total,
+        date: date
+      }
+      console.log('BODY', body);
+      const game = await super.getConnection().none('insert into games(roadteam, hometeam, line, total, side, date)' + 'values(${roadteam}, ${hometeam}, ${line}, ${total}, ${side}, ${date})', body);
+      const data = await super.getConnection().any('select * from games ORDER BY date DESC');
       res.status(200).json(data)
     } catch (e) {
       res.status(400);

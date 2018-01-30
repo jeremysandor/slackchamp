@@ -20,7 +20,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 
 const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
+  
   margin: 0 auto;
   display: flex;
   min-height: 100%;
@@ -42,7 +42,7 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/features" component={FeaturePage} />
         <Route path="/venues" component={VenuePage} />
-        <Route path="/table" component={TablePage} />
+        <Route path="/admin" component={TablePage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />

@@ -12,15 +12,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
   render() {
     return (
       <div>
-        <div>FOOBAR</div>
-        <NavBar>
-          <HeaderLink to="/">
-            <FormattedMessage {...messages.home} />
-          </HeaderLink>
-          <HeaderLink to="/features">
-            <FormattedMessage {...messages.features} />
-          </HeaderLink>
-        </NavBar>
+        <div>TrustTheHinkie</div>
       </div>
     );
   }
@@ -34,3 +26,13 @@ export default Header;
 // <A href="https://twitter.com/mxstbr">
 //   <Img src={Banner} alt="react-boilerplate - Logo" />
 // </A>
+
+
+// <NavBar>
+//   <HeaderLink to="/">
+//     <FormattedMessage {...messages.home} />
+//   </HeaderLink>
+//   <HeaderLink to="/features">
+//     <FormattedMessage {...messages.features} />
+//   </HeaderLink>
+// </NavBar>
