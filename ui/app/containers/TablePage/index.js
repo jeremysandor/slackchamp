@@ -29,7 +29,7 @@ import Input from './Input';
 import Section from './Section';
 import messages from './messages';
 
-import { loadRepos, loadGames } from '../App/actions';
+import { loadRepos, loadGames, loadGamesOnRender } from '../App/actions';
 
 import { changeAwayTeam } from './actions';
 import { changeHomeTeam } from './actions';
@@ -55,8 +55,8 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
    */
   componentDidMount() {
     console.log('componentDidMount props', this.props)
-    if (this.props.username && this.props.username.trim().length > 0) {
-      this.props.onSubmitForm();
+    if (!this.props.games) {
+      this.props.onLoadGames();
     }
   }
 
@@ -130,7 +130,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
                 />
               </label>     
 
-              <DatePicker selected={this.props.date} onChange={this.props.onChangeDate} showTimeSelect timeFormat="HH:mm" dateFormat="LLL"/>
+              
 
               <label htmlFor="date">
                 <Input
@@ -152,6 +152,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
   }
 }
 
+// <DatePicker selected={this.props.date} onChange={this.props.onChangeDate} showTimeSelect timeFormat="HH:mm" dateFormat="LLL"/>
 
 TablePage.propTypes = {
   loading: PropTypes.bool,
@@ -169,7 +170,7 @@ TablePage.propTypes = {
   line: PropTypes.string,
   side: PropTypes.string,
   total: PropTypes.string,
-  date: PropTypes.object,
+  date: PropTypes.string,
   onChangeAwayTeam: PropTypes.func,
   onChangeHomeTeam: PropTypes.func,
   onChangeLine: PropTypes.func,
@@ -185,11 +186,15 @@ export function mapDispatchToProps(dispatch) {
     onChangeLine: (evt) => dispatch(changeLine(evt.target.value)),
     onChangeSide: (evt) => dispatch(changeSide(evt.target.value)),
     onChangeTotal: (evt) => dispatch(changeTotal(evt.target.value)),
-    // onChangeDate: (evt) => dispatch(changeDate(evt.target.value)),
-    onChangeDate: (date) => dispatch(changeDate(date)),
+    onChangeDate: (evt) => dispatch(changeDate(evt.target.value)),
+    // onChangeDate: (date) => dispatch(changeDate(date)),
     onSubmitForm: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadGames());
+    },
+    onLoadGames: (evt) => {
+      console.log('evt', evt);
+      dispatch(loadGamesOnRender())
     },
   };
 }
