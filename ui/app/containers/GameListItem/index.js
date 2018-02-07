@@ -7,6 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import { createStructuredSelector } from 'reselect';
 import { FormattedNumber } from 'react-intl';
 
@@ -30,12 +31,16 @@ export class GameListItem extends React.PureComponent { // eslint-disable-line r
         <div>SIDE: {item.side}</div>
         <div>TOTAL: {item.total}</div>
         <div>DATE: {item.date}</div>
+        <button onClick={this.props.onClick}>{item.id}</button>
       </Wrapper>
     )
 
     // Render the content into a list item
     return (
-      <ListItem key={`repo-list-item-${item.id}`} item={content} />
+      <div>
+        <ListItem key={`repo-list-item-${item.id}`} item={content} />
+        
+      </div>
     );
     
   }
@@ -43,8 +48,32 @@ export class GameListItem extends React.PureComponent { // eslint-disable-line r
 
 GameListItem.propTypes = {
   item: PropTypes.object,
+  onClick: PropTypes.func,
 };
 
-export default connect(createStructuredSelector({
-  // currentUser: makeSelectCurrentUser(),
-}))(GameListItem);
+export function mapDispatchToProps(dispatch) {
+  return {
+    onClick: (evt) => {
+      console.log('EVT', evt);
+      dispatch(changeHomeTeam(evt.target.value))
+    },
+  }
+}
+
+const mapStateToProps = createSelector(
+  makeOnClickLocale(),
+  (onClick) => ({ onClick })
+);
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+const withReducer = injectReducer({ key: 'home', reducer });
+const withSaga = injectSaga({ key: 'home', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(GameListItem);
+
+
