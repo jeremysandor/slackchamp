@@ -1,5 +1,5 @@
 /*
- * Admin page
+ * Main page
  *
  * This is the admin page, at the /admin route
  */

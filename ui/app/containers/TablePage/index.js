@@ -11,13 +11,16 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import DatePicker from 'react-datepicker';
+// import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import { makeSelectGames, makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
+
+// material ui
+import Button from 'material-ui/Button';
+import Input from 'material-ui/Input';
 
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
@@ -25,7 +28,7 @@ import GamesList from 'components/GamesList';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import Form from './Form';
-import Input from './Input';
+// import Input from './Input';
 import Section from './Section';
 import messages from './messages';
 
@@ -142,7 +145,10 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
                 />
               </label>  
 
-              <input type="submit" value="Save"/>
+
+              <Button type="submit" color="primary">
+                Save
+              </Button>
             </Form>
             <GamesList {...gamesListProps} />
           </Section>
@@ -151,7 +157,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
     );
   }
 }
-
+              // <input type="submit" value="Save"/>
 // <DatePicker selected={this.props.date} onChange={this.props.onChangeDate} showTimeSelect timeFormat="HH:mm" dateFormat="LLL"/>
 
 TablePage.propTypes = {
