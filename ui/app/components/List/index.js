@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {List, ListItem} from 'material-ui/List';
+
 import Ul from './Ul';
 import Wrapper from './Wrapper';
+import ListHeader from './ListHeader';
 
-function List(props) {
+function ListElem(props) {
   const ComponentToRender = props.component;
   let content = (<div></div>);
 
@@ -20,6 +23,12 @@ function List(props) {
 
   return (
     <Wrapper>
+      <ListHeader>Home</ListHeader>
+      <ListHeader>Road</ListHeader>
+      <ListHeader>Line</ListHeader>
+      <ListHeader>Side</ListHeader>
+      <ListHeader>Total</ListHeader>
+      <ListHeader>Date</ListHeader>
       <Ul>
         {content}
       </Ul>
@@ -27,9 +36,9 @@ function List(props) {
   );
 }
 
-List.propTypes = {
+ListElem.propTypes = {
   component: PropTypes.func.isRequired,
   items: PropTypes.array,
 };
 
-export default List;
+export default ListElem;

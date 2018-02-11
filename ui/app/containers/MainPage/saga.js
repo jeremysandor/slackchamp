@@ -21,9 +21,9 @@ import { makeSelectDate } from './selectors';
  */
 export function* getGames() {
 
-  let requestURL = 'http://localhost:3001/api/games';
+  let requestURL = 'http://localhost:3001/api/games?gameTime=now';
   if (process.env.NODE_ENV === 'production') {
-    requestURL = 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001/api/games';
+    requestURL = 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001/api/games?gameTime=now';
   }
   console.log('requestURL', requestURL);
 

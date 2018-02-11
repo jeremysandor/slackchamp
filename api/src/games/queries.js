@@ -1,6 +1,8 @@
 // const pgp = require('pg-promise')();
 const Postgres = require('../database/postgres');
 
+const moment = require('moment');
+
 class Game extends Postgres {
   constructor() {
     super();
@@ -8,7 +10,16 @@ class Game extends Postgres {
 
   async getGames(req, res, next) {
     try {
-      const data = await super.getConnection().any('select * from games ORDER BY date DESC');
+      const qs = req.query;
+      const now = moment(new Date());
+      console.log('NOW', moment(new Date()));
+
+      let query = 'select * from games ORDER BY date DESC'
+      if (qs.gameTime === 'now') {
+        query = `select * from games where date <= '${now}' ORDER BY date DESC`
+      }
+      
+      const data = await super.getConnection().any(query);
       res.status(200).json(data)
     } catch (e) {
       res.status(400);
@@ -55,8 +66,23 @@ class Game extends Postgres {
       res.status(400);
       res.json({ok: false, error: e.message});
     }
-  }  
+  }
+
+  async deleteGame (req, res) {
+    try {
+      const {id} = req.params;
+      const gameId = parseInt(id);
+
+      const game = await super.getConnection().none('delete from games where id = $1', gameId);
+      res.status(200).json({gameId: gameId});
+    } catch (e) {
+      res.status(400);
+      res.json({ok: false, error: e.message});
+    }
+
+  }
 
 }
 
 module.exports = Game;
+

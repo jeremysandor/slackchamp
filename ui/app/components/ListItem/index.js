@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Item from './Item';
-import Wrapper from './Wrapper';
+import {List, ListItem} from 'material-ui/List';
 
-function ListItem(props) {
+// import Item from './Item';
+// import Wrapper from './Wrapper';
+
+function ListElem(props) {
   return (
-    <Wrapper>
-      <Item>
-        {props.item}
-      </Item>
-    </Wrapper>
+    <ListItem>
+      {props.item}
+    </ListItem>
   );
 }
 
-ListItem.propTypes = {
+ListElem.propTypes = {
   item: PropTypes.any,
 };
 
-export default ListItem;
+export default ListElem;

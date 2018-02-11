@@ -1,19 +1,26 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import A from './A';
-import Img from './Img';
-import NavBar from './NavBar';
-import HeaderLink from './HeaderLink';
+// import A from './A';
+// import Img from './Img';
+// import NavBar from './NavBar';
+// import HeaderLink from './HeaderLink';
 // import Banner from './banner.jpg';
-import messages from './messages';
+// import messages from './messages';
+
+import AppBar from 'material-ui/AppBar';
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    // return (
+    //   <AppBar 
+    //     title="TrustTheHinkie" 
+    //     children='TrustTheHinkie'
+    //   />
+    // );
+
     return (
-      <div>
-        <div>TrustTheHinkie</div>
-      </div>
+      <div>Trust The Hinkie</div>
     );
   }
 }

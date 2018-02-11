@@ -12,6 +12,7 @@ import { FormattedNumber } from 'react-intl';
 
 // import { makeSelectCurrentUser } from 'containers/App/selectors';
 import ListItem from 'components/ListItem';
+import GameData from './GameData';
 import IssueIcon from './IssueIcon';
 import IssueLink from './IssueLink';
 import RepoLink from './RepoLink';
@@ -24,12 +25,12 @@ export class GameListItem extends React.PureComponent { // eslint-disable-line r
 
     const content = (
       <Wrapper>
-        <div>ROAD: {item.roadteam}</div>
-        <div>HOME: {item.hometeam}</div>
-        <div>LINE: {item.line}</div>
-        <div>SIDE: {item.side}</div>
-        <div>TOTAL: {item.total}</div>
-        <div>DATE: {item.date}</div>
+        <GameData>{item.hometeam}</GameData>
+        <GameData>{item.roadteam}</GameData>
+        <GameData>{item.line}</GameData>
+        <GameData>{item.side}</GameData>
+        <GameData>{item.total}</GameData>
+        <GameData>{item.date}</GameData>
       </Wrapper>
     )
 

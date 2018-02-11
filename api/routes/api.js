@@ -17,5 +17,6 @@ const games = new gameQueries;
 router.get('/games', games.getGames.bind(games));
 router.get('/games/:id', games.getGame.bind(games));
 router.post('/games', games.createGame.bind(games));
+router.delete('/games/:id', games.deleteGame.bind(games));
 
 module.exports = router;

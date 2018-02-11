@@ -150,6 +150,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
                 Save
               </Button>
             </Form>
+
             <GamesList {...gamesListProps} />
           </Section>
         </div>
