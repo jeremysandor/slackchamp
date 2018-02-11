@@ -25,6 +25,7 @@ import Input from 'material-ui/Input';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
 import GamesList from 'components/GamesList';
+import Table from 'components/Table';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import Form from './Form';
@@ -151,6 +152,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
               </Button>
             </Form>
             <GamesList {...gamesListProps} />
+            <Table {...gamesListProps} />
           </Section>
         </div>
       </article>

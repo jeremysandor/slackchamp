@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Table from 'components/Table';
+import GameTableRow from 'containers/GameTableRow'
+
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
@@ -20,9 +23,13 @@ function GamesList({ loading, error, games }) {
   }
 
   if (games !== false) {
-    console.log('components/GamesList', games);
     return <List items={games} component={GameListItem} />;
   }
+
+  if (games !== false) {
+    console.log('components/GamesList', games);
+    return <Table items={games} component={GameListItem} />;
+  }  
 
   return null;
 }
