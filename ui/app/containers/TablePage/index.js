@@ -111,17 +111,7 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
                   value={this.props.line}
                   onChange={this.props.onChangeLine}
                 />
-              </label>
-
-              <label htmlFor="side">
-                <Input
-                  id="side"
-                  type="text"
-                  placeholder="Side"
-                  value={this.props.side}
-                  onChange={this.props.onChangeSide}
-                />
-              </label>              
+              </label>        
 
               <label htmlFor="total">
                 <Input
@@ -133,7 +123,15 @@ export class TablePage extends React.PureComponent { // eslint-disable-line reac
                 />
               </label>     
 
-              
+              <label htmlFor="side">
+                <Input
+                  id="side"
+                  type="text"
+                  placeholder="Side"
+                  value={this.props.side}
+                  onChange={this.props.onChangeSide}
+                />
+              </label>                    
 
               <label htmlFor="date">
                 <Input

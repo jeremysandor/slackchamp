@@ -26,8 +26,8 @@ function ListElem(props) {
       <ListHeader>Home</ListHeader>
       <ListHeader>Road</ListHeader>
       <ListHeader>Line</ListHeader>
-      <ListHeader>Side</ListHeader>
       <ListHeader>Total</ListHeader>
+      <ListHeader>Side</ListHeader>
       <ListHeader>Date</ListHeader>
       <Ul>
         {content}
