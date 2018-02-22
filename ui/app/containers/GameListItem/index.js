@@ -12,8 +12,7 @@ import { FormattedNumber } from 'react-intl';
 
 // import { makeSelectCurrentUser } from 'containers/App/selectors';
 import ListItem from 'components/ListItem';
-import DeleteButton from 'components/DeleteButton';
-// import RemoveGame from 'containers/RemoveGame';
+import DeleteGame from 'containers/DeleteGame';
 
 import GameData from './GameData';
 import Wrapper from './Wrapper';
@@ -31,7 +30,7 @@ export class GameListItem extends React.PureComponent { // eslint-disable-line r
         <GameData>{item.total}</GameData>
         <GameData>{item.side}</GameData>
         <GameData>{item.date}</GameData>
-        <DeleteButton gameId={item.id}/> 
+        <DeleteGame gameId={item.id}/> 
       </Wrapper>
     )
 

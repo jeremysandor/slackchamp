@@ -9,6 +9,11 @@ const selectDeleteGameDomain = (state) => state.get('deleteGame');
  * Other specific selectors
  */
 
+const makeSelectGameId = () => createSelector(
+  selectDeleteGameDomain,
+  (gameState) => gameState.get('gameId')
+);
+
 
 /**
  * Default selector used by DeleteGame
@@ -22,4 +27,5 @@ const makeSelectDeleteGame = () => createSelector(
 export default makeSelectDeleteGame;
 export {
   selectDeleteGameDomain,
+  makeSelectGameId,
 };

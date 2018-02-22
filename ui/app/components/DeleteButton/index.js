@@ -13,7 +13,7 @@ import RemoveGame from 'containers/RemoveGame';
 
 function DeleteButton(gameId) {
   // console.log('DeleteButton', gameId);
-  console.log('RemoveGame', RemoveGame());
+  // console.log('RemoveGame', RemoveGame());
 
   return (
     <button onClick={RemoveGame}>[X]</button>

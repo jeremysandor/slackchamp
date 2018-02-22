@@ -13,7 +13,10 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectDeleteGame from './selectors';
+
+import { deleteAction } from './actions';
+
+import { makeSelectDeleteGame, makeSelectGameId } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -21,28 +24,32 @@ export class DeleteGame extends React.PureComponent { // eslint-disable-line rea
   
 
   render() {
-    console.log('DeleteGame...')
+    console.log('DeleteGame...', this.props)
     return (
-      <div>
-        <Helmet>
-          <title>DeleteGame</title>
-          <meta name="description" content="Description of DeleteGame" />
-        </Helmet>
-      </div>
+      <button value={this.props.gameId} onClick={this.props.delete}>
+        [X]
+      </button>
     );
   }
 }
 
 DeleteGame.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
+  delete: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  deletegame: makeSelectDeleteGame(),
+  // deletegame: makeSelectDeleteGame(),
+  // gameId: makeSelectGameId(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
+    delete: (evt) => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      console.log('EVT', evt.target);
+      dispatch(deleteAction(evt.target.value));
+    },    
     dispatch,
   };
 }

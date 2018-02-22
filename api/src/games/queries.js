@@ -74,7 +74,8 @@ class Game extends Postgres {
       const gameId = parseInt(id);
 
       const game = await super.getConnection().none('delete from games where id = $1', gameId);
-      res.status(200).json({gameId: gameId});
+      const data = await super.getConnection().any('select * from games ORDER BY date DESC');
+      res.status(200).json(data);
     } catch (e) {
       res.status(400);
       res.json({ok: false, error: e.message});
