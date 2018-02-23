@@ -1,18 +1,18 @@
+
 version: '3.3'
 services:
-  # nginx:
-  #   restart: always
-  #   build: ./nginx/
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - /www/public
-  #   # volumes_from:
-  #   #   - web
-  #   links:
-  #     - web:web
-  #   depends_on:
-  #     - web
+  nginx:
+    image: "jeremysandor/slackchamp_nginx:latest"
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    # volumes:
+    #   - /www/public
+    # volumes_from:
+    #   - web
+    links:
+      - ui:ui
   
   ui:
     image: "jeremysandor/slackchamp_ui:latest"
