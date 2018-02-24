@@ -2,17 +2,17 @@
 
 version: '3.3'
 services:
-  # nginx:
-  #   image: "jeremysandor/slackchamp_nginx:latest"
-  #   build: ./nginx/
-  #   ports:
-  #     - "80:80"
-  #   # volumes:
-  #   #   - /www/public
-  #   # volumes_from:
-  #   #   - web
-  #   links:
-  #     - ui:ui
+  nginx:
+    image: "jeremysandor/slackchamp_nginx:latest"
+    build: ./nginx/
+    ports:
+      - "80:80"
+    # volumes:
+    #   - /www/public
+    # volumes_from:
+    #   - web
+    links:
+      - ui:ui
 
   ui:
     image: "jeremysandor/slackchamp_ui:latest"
