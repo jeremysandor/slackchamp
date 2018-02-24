@@ -57,7 +57,7 @@ services:
       AUTH0_CLIENT_ID: ariBhQW-sIIhj9oXVSgWDvRlWhoQTAQu
       AUTH0_DOMAIN: slackchamp.auth0.com
       AUTH0_CLIENT_SECRET: 7io8_1Lq0dXXnzo0-uxHZ3kI_sLkD6ujxm1GZmSwWt78r1QlK-JGGosUNq6Ifd2N
-      AUTH0_CALLBACK_URL: http://localhost:3001/callback
+      AUTH0_CALLBACK_URL: http://app.trustthehinkie.com/callback
   
   postgres:
     image: "jeremysandor/slackchamp_db:latest"
