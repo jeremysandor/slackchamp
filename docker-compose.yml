@@ -13,7 +13,7 @@ services:
     links:
       - ui:ui
     deploy:
-      replicas: 1
+      replicas: 3
       placement:
         constraints:
           - node.role == worker
@@ -26,7 +26,7 @@ services:
     ports:
       - "3000:3000" 
     deploy:
-      replicas: 1
+      replicas: 2
       placement:
         constraints:
           - node.role == worker
@@ -45,7 +45,7 @@ services:
     ports:
      - "3001:3001"
     deploy:
-      replicas: 1
+      replicas: 2
       placement:
         constraints:
           - node.role == worker

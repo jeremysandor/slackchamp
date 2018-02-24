@@ -20,7 +20,7 @@ router.get('/login', passport.authenticate('auth0', {
   redirectUri: env.AUTH0_CALLBACK_URL,
   responseType: 'code',
   audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
-  scope: 'openid profile'}),
+  scope: 'openid profile admin'}),
   function(req, res) {
     console.log('login request', req);
     res.redirect("/");
