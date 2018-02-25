@@ -12,6 +12,7 @@ services:
     #   - web
     links:
       - ui:ui
+      - web:web
     deploy:
       replicas: 3
       placement:

@@ -1,6 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn('/api/login');
 const router = express.Router();
 const userQueries = require('../src/user/queries');
 const gameQueries = require('../src/games/queries');

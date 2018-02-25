@@ -99,7 +99,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', routes);
+app.use('/api', routes);
 app.use('/api', api);
 app.use('/user', user);
 
