@@ -99,6 +99,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// app.options('/*', (req, res, next) => {
+//   console.log('OPTIONS', req);
+//   next();
+// });
+
 app.use('/api', routes);
 app.use('/api', api);
 app.use('/user', user);
