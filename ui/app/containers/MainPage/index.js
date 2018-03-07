@@ -62,7 +62,7 @@ export class MainPage extends React.PureComponent { // eslint-disable-line react
     return (
       <article>
         <Helmet>
-          <title>Admin</title>
+          <title>Home</title>
           <meta name="description" content="Main Page" />
         </Helmet>
         <div>
