@@ -2,7 +2,15 @@ class Session {
   constructor() {}
 
   async getSession(req, res, next) {
-    res.json(req.session);
+    let sessionObj = JSON.parse(JSON.stringify(req.session));
+    
+    if (sessionObj.passport && sessionObj.passport.user) {
+      sessionObj['loggedIn'] = true;
+    }
+    if (sessionObj.passport && sessionObj.passport.user && sessionObj.passport.user._json && sessionObj.passport.user._json['https://app.trustthehinkie.com/admin']) {
+      sessionObj['admin'] = true;
+    }
+    res.json(sessionObj);
   }
 }
 
