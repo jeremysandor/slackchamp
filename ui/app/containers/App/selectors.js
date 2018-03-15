@@ -38,6 +38,11 @@ const makeSelectGames = () => createSelector(
   (globalState) => globalState.get('games')
 );
 
+const sessionSelector = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('session')
+);
+
 export {
   selectGlobal,
   makeSelectCurrentUser,
@@ -46,4 +51,5 @@ export {
   makeSelectRepos,
   makeSelectLocation,
   makeSelectGames,
+  sessionSelector,
 };

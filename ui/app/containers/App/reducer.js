@@ -13,6 +13,7 @@
 import { fromJS } from 'immutable';
 
 import {
+  LOAD_SESSION,
   LOAD_GAMES,
   LOAD_GAMES_SUCCESS,
   LOAD_GAMES_ERROR,
@@ -30,10 +31,15 @@ const initialState = fromJS({
     repositories: false,
   },
   games: false,
+  session: {},
 });
 
 function appReducer(state = initialState, action) {
+  console.log('appReducer', action)
   switch (action.type) {
+    case LOAD_SESSION:
+      return state
+        .set('session', {})
     case LOAD_GAMES:
       return state
         .set('loading', true)
