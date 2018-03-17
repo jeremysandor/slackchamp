@@ -31,8 +31,7 @@ import {sessionSelector} from './selectors';
 import {loadSession} from './actions';
 
 import reducer from './reducer';
-
-// import saga from './saga';
+import saga from './saga';
 
 
 const AppWrapper = styled.div`
@@ -102,13 +101,16 @@ export class App extends React.PureComponent {
 App.propTypes = {
   // loggedIn: PropTypes.bool,
   // isAdmin: PropTypes.bool,
-  session: PropTypes.object
+  session: PropTypes.oneOfType([
+    PropTypes.object, 
+    PropTypes.bool
+  ]),
 }
 
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadSession: (evt) => {
-      console.log('evt', evt);
+      console.log('onLoadSession evt', evt);
       dispatch(loadSession())
     },
   };
@@ -121,12 +123,12 @@ const mapStateToProps = createStructuredSelector({
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withReducer = injectReducer({key: 'session', reducer });
-// const withSaga = injectSaga({key: 'session', saga });
+const withSaga = injectSaga({key: 'session', saga });
 
 
 export default compose(
   withReducer,
-  // withSaga,
+  withSaga,
   withConnect,  
 )(App);
 

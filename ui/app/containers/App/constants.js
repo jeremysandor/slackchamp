@@ -10,6 +10,7 @@
  */
 
 export const LOAD_SESSION = 'slackchamp/App/LOAD_SESSION';
+export const LOAD_SESSION_SUCCESS = 'slackchamp/App/LOAD_SESSION_SUCCESS';
 
 export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
 export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';

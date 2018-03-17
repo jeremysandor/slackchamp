@@ -17,6 +17,7 @@
 
 import {
   LOAD_SESSION,
+  LOAD_SESSION_SUCCESS,
   LOAD_GAMES_ON_RENDER,
   LOAD_GAMES,
   LOAD_GAMES_SUCCESS,
@@ -31,6 +32,13 @@ export function loadSession() {
   console.log('got loadSession');
   return {
     type: LOAD_SESSION,
+  }
+}
+
+export function sessionLoaded(session) {
+  return {
+    type: LOAD_SESSION_SUCCESS,
+    session,
   }
 }
 

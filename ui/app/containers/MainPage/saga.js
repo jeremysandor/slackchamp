@@ -8,13 +8,13 @@ import { gamesLoaded, gameLoadingError } from 'containers/App/actions';
 
 import request from 'utils/request';
 // import { makeSelectUsername } from 'containers/HomePage/selectors';
-import { makeSelectUsername } from './selectors';
-import { makeSelectAwayTeam } from './selectors';
-import { makeSelectHomeTeam } from './selectors';
-import { makeSelectLine } from './selectors';
-import { makeSelectSide } from './selectors';
-import { makeSelectTotal } from './selectors';
-import { makeSelectDate } from './selectors';
+// import { makeSelectUsername } from './selectors';
+// import { makeSelectAwayTeam } from './selectors';
+// import { makeSelectHomeTeam } from './selectors';
+// import { makeSelectLine } from './selectors';
+// import { makeSelectSide } from './selectors';
+// import { makeSelectTotal } from './selectors';
+// import { makeSelectDate } from './selectors';
 
 /**
  * Games request/response handler
