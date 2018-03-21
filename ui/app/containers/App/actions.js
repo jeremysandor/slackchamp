@@ -36,6 +36,7 @@ export function loadSession() {
 }
 
 export function sessionLoaded(session) {
+  console.log('sessionLoaded', session);
   return {
     type: LOAD_SESSION_SUCCESS,
     session,

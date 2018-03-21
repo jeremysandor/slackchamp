@@ -5,6 +5,7 @@ const router = express.Router();
 const AppSession = require('../src/session');
 const UserQueries = require('../src/user/queries');
 const GameQueries = require('../src/games/queries');
+const middleware = require('../src/middleware');
 
 /* GET user profile. */
 const users = new UserQueries;
@@ -13,6 +14,9 @@ router.get('/users', users.getUsers.bind(users));
 // router.get('/users', ensureLoggedIn, db.getAllUsers);
 // router.get('/users/:id', ensureLoggedIn, db.getUser);
 // router.post('/users', db.createUser);
+
+// apply middleware
+router.get('*', middleware.applySession);
 
 const games = new GameQueries;
 router.get('/games', games.getGames.bind(games));

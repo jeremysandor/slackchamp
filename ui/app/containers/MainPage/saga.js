@@ -21,7 +21,7 @@ import request from 'utils/request';
  */
 export function* getGames() {
 
-  let requestURL = 'http://localhost:3001/api/games?gameTime=now';
+  let requestURL = 'http://localhost/api/games?gameTime=now';
   if (process.env.NODE_ENV === 'production') {
     requestURL = 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001/api/games?gameTime=now';
   }

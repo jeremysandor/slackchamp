@@ -16,7 +16,8 @@ import { sessionSelector } from './selectors';
 export function* fetchSession() {
   console.log('FETCH SESSION');
 
-  let requestURL = 'http://localhost:3001/api/session';
+  // let requestURL = 'http://localhost:3001/api/session';
+  let requestURL = 'http://localhost/api/session';
   if (process.env.NODE_ENV === 'production') {
     requestURL = 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001/api/session';
   }
@@ -27,7 +28,9 @@ export function* fetchSession() {
       headers : {
         'Accept'        : 'application/json',
         'Content-Type'  : 'application/json'
-      }
+      },
+      // withCredentials: true
+      credentials: 'include'
     }
 
     console.log('OPTS', opts);
