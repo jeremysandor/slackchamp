@@ -14,6 +14,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import injectReducer from 'utils/injectReducer';
@@ -32,6 +33,8 @@ import {loadSession} from './actions';
 
 import reducer from './reducer';
 import saga from './saga';
+
+import { Link } from 'react-router-dom';
 
 // material ui
 import { withStyles } from 'material-ui/styles';
@@ -53,7 +56,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 430,
+    height: '100%',
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -61,6 +64,7 @@ const styles = theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: 'grey',
   },
   drawerPaper: {
     position: 'relative',
@@ -137,20 +141,24 @@ export class App extends React.PureComponent {
         >
         <div className={this.props.classes.toolbar} />
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <Home />
-            </ListItemIcon>
-            <ListItemText primary="Games" />
-          </ListItem>          
+          <Link to="/">{' '}
+            <ListItem button>
+              <ListItemIcon>
+                <Home />
+              </ListItemIcon>
+              <ListItemText primary="Games" />
+            </ListItem>          
+          </Link>
         </List>
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <SupervisorAccount />
-            </ListItemIcon>
-            <ListItemText primary="Admin" />
-          </ListItem>                
+          <Link to="/admin">
+            <ListItem button>
+              <ListItemIcon>
+                <SupervisorAccount />
+              </ListItemIcon>
+              <ListItemText primary="Admin" />
+            </ListItem>                
+          </Link>
         </List>
 
         </Drawer>
@@ -169,7 +177,7 @@ export class App extends React.PureComponent {
     )
   }
 
-
+// <ListItem button component="a" href="/admin">
 
   // render() {
   //   return (
@@ -217,16 +225,17 @@ const mapStateToProps = createStructuredSelector({
   session: sessionSelector(),
 });
 
+// const withConnect = connect(mapStateToProps, mapDispatchToProps, null, {pure: false});
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withReducer = injectReducer({key: 'session', reducer });
 const withSaga = injectSaga({key: 'session', saga });
 
 
-export default compose(
+export default withRouter(compose(
   withReducer,
   withSaga,
   withConnect,
   withStyles(styles),
-)(App);
+)(App));
 
