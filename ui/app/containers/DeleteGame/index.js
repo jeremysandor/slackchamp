@@ -16,6 +16,7 @@ import injectReducer from 'utils/injectReducer';
 
 import { deleteAction } from './actions';
 
+import { sessionSelector } from '../App/selectors'
 import { makeSelectDeleteGame, makeSelectGameId } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -24,12 +25,16 @@ export class DeleteGame extends React.PureComponent { // eslint-disable-line rea
   
 
   render() {
-    console.log('DeleteGame...', this.props)
-    return (
-      <button value={this.props.gameId} onClick={this.props.delete}>
-        [X]
-      </button>
-    );
+    if (this.props.session && this.props.session.admin) {
+      return (
+        <button value={this.props.gameId} onClick={this.props.delete}>
+          [X]
+        </button>  
+      );
+    } else {
+      return null;
+    }
+
   }
 }
 
@@ -41,6 +46,7 @@ DeleteGame.propTypes = {
 const mapStateToProps = createStructuredSelector({
   // deletegame: makeSelectDeleteGame(),
   // gameId: makeSelectGameId(),
+  session: sessionSelector()
 });
 
 function mapDispatchToProps(dispatch) {

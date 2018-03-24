@@ -8,20 +8,20 @@ import { gamesLoaded, gameLoadingError } from 'containers/App/actions';
 
 import request from 'utils/request';
 // import { makeSelectUsername } from 'containers/HomePage/selectors';
-import { makeSelectUsername } from './selectors';
-import { makeSelectAwayTeam } from './selectors';
-import { makeSelectHomeTeam } from './selectors';
-import { makeSelectLine } from './selectors';
-import { makeSelectSide } from './selectors';
-import { makeSelectTotal } from './selectors';
-import { makeSelectDate } from './selectors';
+// import { makeSelectUsername } from './selectors';
+// import { makeSelectAwayTeam } from './selectors';
+// import { makeSelectHomeTeam } from './selectors';
+// import { makeSelectLine } from './selectors';
+// import { makeSelectSide } from './selectors';
+// import { makeSelectTotal } from './selectors';
+// import { makeSelectDate } from './selectors';
 
 /**
  * Games request/response handler
  */
 export function* getGames() {
 
-  let requestURL = 'http://localhost:3001/api/games?gameTime=now';
+  let requestURL = 'http://localhost/api/games?gameTime=now';
   if (process.env.NODE_ENV === 'production') {
     requestURL = 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001/api/games?gameTime=now';
   }

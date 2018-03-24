@@ -16,6 +16,8 @@
  */
 
 import {
+  LOAD_SESSION,
+  LOAD_SESSION_SUCCESS,
   LOAD_GAMES_ON_RENDER,
   LOAD_GAMES,
   LOAD_GAMES_SUCCESS,
@@ -25,12 +27,29 @@ import {
   LOAD_REPOS_ERROR,
 } from './constants';
 
+
+export function loadSession() {
+  console.log('got loadSession');
+  return {
+    type: LOAD_SESSION,
+  }
+}
+
+export function sessionLoaded(session) {
+  console.log('sessionLoaded', session);
+  return {
+    type: LOAD_SESSION_SUCCESS,
+    session,
+  }
+}
+
 /**
  * Load the games on render, this action starts the request saga
  *
  * @return {object} An action object with a type of LOAD_GAMES_ON_RENDER
  */
 export function loadGamesOnRender() {
+  console.log('got loadGamesOnRender');
   return {
     type: LOAD_GAMES_ON_RENDER,
   };
