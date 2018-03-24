@@ -9,21 +9,35 @@ import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
 
 import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  
+  
   render() {
-    // return (
-    //   <AppBar 
-    //     title="TrustTheHinkie" 
-    //     children='TrustTheHinkie'
-    //   />
-    // );
-
     return (
-      <div>Trust The Hinkie</div>
+      <AppBar position="static" >      
+        <Toolbar>
+          <IconButton className="menu" color="inherit" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>          
+          <Typography variant="title" color="inherit">
+            Trust the Hinkie
+          </Typography>
+        </Toolbar>
+      </AppBar>
     );
+
+    // return (
+    //   <div>Trust The Hinkie</div>
+    // );
   }
 }
+
+
 
 export default Header;
 

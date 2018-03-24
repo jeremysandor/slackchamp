@@ -33,6 +33,49 @@ import {loadSession} from './actions';
 import reducer from './reducer';
 import saga from './saga';
 
+// material ui
+import { withStyles } from 'material-ui/styles';
+import Drawer from 'material-ui/Drawer';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import { List, ListItem, ListItemIcon, ListItemText } from 'material-ui';
+import Typography from 'material-ui/Typography';
+import Divider from 'material-ui/Divider';
+
+// to-do move to a component 
+import SupervisorAccount from 'material-ui-icons/SupervisorAccount';
+import Home from 'material-ui-icons/Home';
+
+
+
+const drawerWidth = 240;
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    height: 430,
+    zIndex: 1,
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  drawerPaper: {
+    position: 'relative',
+    width: drawerWidth,
+  },
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing.unit * 3,
+    minWidth: 0, // So the Typography noWrap works
+  },
+  toolbar: theme.mixins.toolbar,
+});
+
+
 
 const AppWrapper = styled.div`
   
@@ -67,6 +110,7 @@ const AppWrapper = styled.div`
 
 
 export class App extends React.PureComponent {
+
   componentDidMount() {
     console.log('APP componentDidMount', this.props);
     if (!this.props.session) {
@@ -77,30 +121,83 @@ export class App extends React.PureComponent {
 
   render() {
     return (
-      <AppWrapper>
-        <Helmet
-          titleTemplate="%s - Trust the Hinkie"
-          defaultTitle="Trust the Hinkie"
+      <div className={this.props.classes.root}>
+        <AppBar position="absolute" className={this.props.classes.appBar}>
+          <Toolbar>
+            <Typography variant="title" color="inherit" noWrap>
+              Trust the Hinkie
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: this.props.classes.drawerPaper,
+          }}
         >
-          <meta name="description" content="Trust it" />
-        </Helmet>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={MainPage} />
-          <Route path="/features" component={FeaturePage} />
-          <Route path="/venues" component={VenuePage} />
-          <Route path="/admin" component={TablePage} />
-          <Route path="" component={NotFoundPage} />
-        </Switch>
-        <Footer />
-      </AppWrapper>
+        <div className={this.props.classes.toolbar} />
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <Home />
+            </ListItemIcon>
+            <ListItemText primary="Games" />
+          </ListItem>          
+        </List>
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <SupervisorAccount />
+            </ListItemIcon>
+            <ListItemText primary="Admin" />
+          </ListItem>                
+        </List>
+
+        </Drawer>
+        <main className={this.props.classes.content}>
+          <div className={this.props.classes.toolbar} />
+          <Switch>
+           <Route exact path="/" component={MainPage} />
+           <Route path="/features" component={FeaturePage} />
+           <Route path="/venues" component={VenuePage} />
+           <Route path="/admin" component={TablePage} />
+           <Route path="" component={NotFoundPage} />
+          </Switch>
+          <Footer />          
+        </main>        
+      </div>
     )
   }
+
+
+
+  // render() {
+  //   return (
+  //     <AppWrapper>
+  //       <Helmet
+  //         titleTemplate="%s - Trust the Hinkie"
+  //         defaultTitle="Trust the Hinkie"
+  //       >
+  //         <meta name="description" content="Trust it" />
+  //       </Helmet>
+  //       <Header />
+  //       <Switch>
+  //         <Route exact path="/" component={MainPage} />
+  //         <Route path="/features" component={FeaturePage} />
+  //         <Route path="/venues" component={VenuePage} />
+  //         <Route path="/admin" component={TablePage} />
+  //         <Route path="" component={NotFoundPage} />
+  //       </Switch>
+  //       <Footer />
+  //     </AppWrapper>
+  //   )
+  // }
 }
 
 App.propTypes = {
   // loggedIn: PropTypes.bool,
   // isAdmin: PropTypes.bool,
+  classes: PropTypes.object,
   session: PropTypes.oneOfType([
     PropTypes.object, 
     PropTypes.bool
@@ -129,6 +226,7 @@ const withSaga = injectSaga({key: 'session', saga });
 export default compose(
   withReducer,
   withSaga,
-  withConnect,  
+  withConnect,
+  withStyles(styles),
 )(App);
 
