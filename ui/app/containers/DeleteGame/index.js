@@ -21,6 +21,8 @@ import { makeSelectDeleteGame, makeSelectGameId } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+import Clear from 'material-ui-icons/Clear';
+
 export class DeleteGame extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   
 

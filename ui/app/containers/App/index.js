@@ -44,10 +44,12 @@ import Toolbar from 'material-ui/Toolbar';
 import { List, ListItem, ListItemIcon, ListItemText } from 'material-ui';
 import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
+import Button from 'material-ui/Button';
 
 // to-do move to a component 
 import SupervisorAccount from 'material-ui-icons/SupervisorAccount';
 import Home from 'material-ui-icons/Home';
+import ViewList from 'material-ui-icons/ViewList';
 
 
 
@@ -77,6 +79,9 @@ const styles = theme => ({
     minWidth: 0, // So the Typography noWrap works
   },
   toolbar: theme.mixins.toolbar,
+  flex: {
+    flex: 1,
+  }
 });
 
 
@@ -128,9 +133,12 @@ export class App extends React.PureComponent {
       <div className={this.props.classes.root}>
         <AppBar position="absolute" className={this.props.classes.appBar}>
           <Toolbar>
-            <Typography variant="title" color="inherit" noWrap>
+            <Typography variant="title" color="inherit" className={this.props.classes.flex} noWrap>
               Trust the Hinkie
             </Typography>
+            <a href="http://localhost/api/login">
+              <Button color="inherit">Login</Button>
+            </a>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -141,10 +149,10 @@ export class App extends React.PureComponent {
         >
         <div className={this.props.classes.toolbar} />
         <List>
-          <Link to="/">{' '}
+          <Link to="/">
             <ListItem button>
               <ListItemIcon>
-                <Home />
+                <ViewList />
               </ListItemIcon>
               <ListItemText primary="Games" />
             </ListItem>          
