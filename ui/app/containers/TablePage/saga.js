@@ -67,6 +67,7 @@ export function* createGames() {
 
 
 export function* getGames() {
+  console.log('ENV', process.env);
 
   let requestURL = 'http://localhost:3001/api/games';
   if (process.env.NODE_ENV === 'production') {
