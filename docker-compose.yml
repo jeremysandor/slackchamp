@@ -39,6 +39,8 @@ services:
     environment:
       API_URL: 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001'
       NODE_ENV: production
+      WEB_SERVICE_HOST: '100.64.105.167'
+      WEB_SERVICE_PORT: '3001'
 
   web:
     image: "jeremysandor/slackchamp_web:latest"

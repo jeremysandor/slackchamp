@@ -30,6 +30,8 @@ services:
     environment:
       API_URL: 'http://localhost:3001'
       NODE_ENV: development
+      WEB_SERVICE_HOST: 'localhost'
+      WEB_SERVICE_PORT: '3001'
 
   web:
     image: "jeremysandor/slackchamp_web:latest"

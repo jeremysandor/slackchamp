@@ -67,11 +67,13 @@ export function* createGames() {
 
 
 export function* getGames() {
-  let requestURL = 'http://localhost:3001/api/games';
-  if (process.env.NODE_ENV === 'production') {
-    // requestURL = 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001/api/games';
-    requestURL = 'http://web:3001/api/games';
-  }
+  // let requestURL = 'http://localhost:3001/api/games';
+  // if (process.env.NODE_ENV === 'production') {
+  //   // requestURL = 'http://ec2-13-57-176-254.us-west-1.compute.amazonaws.com:3001/api/games';
+  //   requestURL = 'http://web:3001/api/games';
+  // }
+  let requestURL = `${process.env.WEB_SERVICE_HOST}:${process.env.WEB_SERVICE_PORT}/api/games`
+
   console.log('ENV', process.env);
   console.log('getGames requestURL', requestURL);
 
