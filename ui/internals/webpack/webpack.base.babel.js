@@ -96,6 +96,10 @@ module.exports = (options) => ({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         WEB_SERVICE_HOST: JSON.stringify(process.env.WEB_SERVICE_HOST),
         WEB_SERVICE_PORT: JSON.stringify(process.env.WEB_SERVICE_PORT),
+        AWS_IDENTITY_POOL_ID: JSON.stringify(process.env.AWS_IDENTITY_POOL_ID),
+        AWS_REGION: JSON.stringify(process.env.AWS_REGION),
+        AWS_USER_POOL_ID: JSON.stringify(process.env.AWS_USER_POOL_ID),
+        AWS_USER_POOL_WEB_CLIENT_ID: JSON.stringify(process.env.AWS_USER_POOL_WEB_CLIENT_ID)
       },
     }),
     new webpack.NamedModulesPlugin(),

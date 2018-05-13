@@ -24,6 +24,7 @@ services:
       - ./ui:/ui
     links:
       - web:web
+    command: npm run start:dev
     configs:
       - source: ui_config_js
         target: /ui/config.js
