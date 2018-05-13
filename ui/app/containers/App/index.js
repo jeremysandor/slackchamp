@@ -24,6 +24,7 @@ import MainPage from 'containers/MainPage/Loadable';
 import FeaturePage from 'containers/FeaturePage/Loadable';
 import VenuePage from 'containers/VenuePage/Loadable';
 import TablePage from 'containers/TablePage/Loadable';
+import Signup from 'containers/Signup/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -205,6 +206,7 @@ export class App extends React.PureComponent {
            <Route path="/features" component={FeaturePage} />
            <Route path="/venues" component={VenuePage} />
            <Route path="/admin" component={TablePage} />
+           <Route path="/signup" component={Signup} />
            <Route path="" component={NotFoundPage} />
           </Switch>
           <Footer />          
@@ -268,10 +270,10 @@ const withReducer = injectReducer({key: 'session', reducer });
 const withSaga = injectSaga({key: 'session', saga });
 
 
-export default withAuthenticator(withRouter(compose(
+export default withRouter(compose(
   withReducer,
   withSaga,
   withConnect,
   withStyles(styles),
-)(App)));
+)(App));
 
