@@ -14,18 +14,19 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectSignup from './selectors';
+import { makeSelectSignup, makeSelectEmail, makeSelectPassword} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+
+// actions
+import { signup, changeEmail, changePassword } from './actions'
 
 // material ui
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Input from 'material-ui/Input';
 
-
-import { Auth } from 'aws-amplify';
 
 export class Signup extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -45,6 +46,7 @@ export class Signup extends React.PureComponent { // eslint-disable-line react/p
                 type="text"
                 placeholder="Email"
                 value={this.props.email}
+                onChange={this.props.onChangeEmail}
               />
             </label><br />
 
@@ -54,6 +56,7 @@ export class Signup extends React.PureComponent { // eslint-disable-line react/p
                 type="password"
                 placeholder="Password"
                 value={this.props.password}
+                onChange={this.props.onChangePassword}
               />
             </label><br />           
 
@@ -70,15 +73,28 @@ export class Signup extends React.PureComponent { // eslint-disable-line react/p
 Signup.propTypes = {
   dispatch: PropTypes.func.isRequired,
   onSubmitForm: PropTypes.func,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  onChangeEmail: PropTypes.func,
+  onChangePassword: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   signup: makeSelectSignup(),
+  email: makeSelectEmail(),
+  password: makeSelectPassword(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onChangeEmail: (evt) => dispatch(changeEmail(evt.target.value)),
+    onChangePassword: (evt) => dispatch(changePassword(evt.target.value)),
+    onSubmitForm: (evt) => {
+      console.log('EVT', evt);
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(signup());
+    },    
   };
 }
 

@@ -19,7 +19,20 @@ const makeSelectSignup = () => createSelector(
   (substate) => substate.toJS()
 );
 
-export default makeSelectSignup;
+const makeSelectEmail = () => createSelector(
+  selectSignupDomain,
+  (substate) => substate.get('email')
+);
+
+const makeSelectPassword = () => createSelector(
+  selectSignupDomain,
+  (substate) => substate.get('password')
+);
+
+// export default makeSelectSignup;
 export {
   selectSignupDomain,
+  makeSelectSignup,
+  makeSelectEmail,
+  makeSelectPassword
 };
