@@ -1,6 +1,6 @@
 /**
  *
- * Signup
+ * Signin
  *
  */
 
@@ -8,35 +8,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { makeSelectSignup, makeSelectEmail, makeSelectPassword } from './selectors';
+import { makeSelectSignin, makeSelectEmail, makeSelectPassword } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
 
-// actions
-import { signup, changeEmail, changePassword } from './actions'
+import { signin, changeEmail, changePassword } from './actions'
 
 // material ui
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Input from 'material-ui/Input';
 
-
-export class Signup extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class Signin extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
         <Helmet>
-          <title>Signup</title>
-          <meta name="description" content="Signup for Zipstu" />
+          <title>Sign In</title>
+          <meta name="description" content="Description of Signin" />
         </Helmet>
-        <FormattedMessage {...messages.header} />
+
         <div>
           <form onSubmit={this.props.onSubmitForm}>
             
@@ -61,28 +57,29 @@ export class Signup extends React.PureComponent { // eslint-disable-line react/p
             </label><br />           
 
             <Button type="submit" color="primary">
-              Sign Up
+              Sign In
             </Button>
           </form>
         </div>
+
       </div>
     );
   }
 }
 
-Signup.propTypes = {
+Signin.propTypes = {
   dispatch: PropTypes.func.isRequired,
   onSubmitForm: PropTypes.func,
   email: PropTypes.string,
   password: PropTypes.string,
   onChangeEmail: PropTypes.func,
-  onChangePassword: PropTypes.func,
+  onChangePassword: PropTypes.func,  
 };
 
 const mapStateToProps = createStructuredSelector({
-  signup: makeSelectSignup(),
+  signin: makeSelectSignin(),
   email: makeSelectEmail(),
-  password: makeSelectPassword(),
+  password: makeSelectPassword(),  
 });
 
 function mapDispatchToProps(dispatch) {
@@ -93,18 +90,18 @@ function mapDispatchToProps(dispatch) {
     onSubmitForm: (evt) => {
       console.log('EVT', evt);
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(signup());
-    },    
+      dispatch(signin());
+    },      
   };
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'signup', reducer });
-const withSaga = injectSaga({ key: 'signup', saga });
+const withReducer = injectReducer({ key: 'signin', reducer });
+const withSaga = injectSaga({ key: 'signin', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(Signup);
+)(Signin);
