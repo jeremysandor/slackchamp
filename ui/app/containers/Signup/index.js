@@ -25,15 +25,13 @@ import { signup, changeEmail, changePassword } from './actions'
 // material ui
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import Input from 'material-ui/Input';
-
 
 export class Signup extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
         <Helmet>
-          <title>Signup</title>
+          <title>Sign Up</title>
           <meta name="description" content="Signup for Zipstu" />
         </Helmet>
         <FormattedMessage {...messages.header} />
@@ -41,20 +39,21 @@ export class Signup extends React.PureComponent { // eslint-disable-line react/p
           <form onSubmit={this.props.onSubmitForm}>
             
             <label htmlFor="email">
-              <Input
+              <TextField
+                autoFocus
                 id="email"
                 type="text"
-                placeholder="Email"
+                label="Email"
                 value={this.props.email}
                 onChange={this.props.onChangeEmail}
               />
             </label><br />
 
             <label htmlFor="password">
-              <Input
+              <TextField
                 id="password"
                 type="password"
-                placeholder="Password"
+                label="Password"
                 value={this.props.password}
                 onChange={this.props.onChangePassword}
               />

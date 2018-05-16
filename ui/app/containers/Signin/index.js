@@ -22,7 +22,6 @@ import { signin, changeEmail, changePassword } from './actions'
 // material ui
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import Input from 'material-ui/Input';
 
 export class Signin extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -37,20 +36,22 @@ export class Signin extends React.PureComponent { // eslint-disable-line react/p
           <form onSubmit={this.props.onSubmitForm}>
             
             <label htmlFor="email">
-              <Input
+              
+              <TextField
+                autoFocus
+                label="Email"
                 id="email"
                 type="text"
-                placeholder="Email"
                 value={this.props.email}
                 onChange={this.props.onChangeEmail}
               />
             </label><br />
 
             <label htmlFor="password">
-              <Input
+              <TextField
+                label="Password"
                 id="password"
                 type="password"
-                placeholder="Password"
                 value={this.props.password}
                 onChange={this.props.onChangePassword}
               />
