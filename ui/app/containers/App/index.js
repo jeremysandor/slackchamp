@@ -26,6 +26,7 @@ import VenuePage from 'containers/VenuePage/Loadable';
 import TablePage from 'containers/TablePage/Loadable';
 import Signup from 'containers/Signup/Loadable';
 import Signin from 'containers/Signin/Loadable';
+import ForgotPassword from 'containers/ForgotPassword/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -209,6 +210,7 @@ export class App extends React.PureComponent {
            <Route path="/admin" component={TablePage} />
            <Route path="/signup" component={Signup} />
            <Route path="/signin" component={Signin} />
+           <Route path="/forgotpassword" component={ForgotPassword} />
            <Route path="" component={NotFoundPage} />
           </Switch>
           <Footer />          
