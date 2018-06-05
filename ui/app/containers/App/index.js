@@ -50,6 +50,8 @@ import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
 import Button from 'material-ui/Button';
 
+import Grid from 'material-ui/Grid';
+
 // to-do move to a component 
 import SupervisorAccount from 'material-ui-icons/SupervisorAccount';
 import Home from 'material-ui-icons/Home';
@@ -90,15 +92,16 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: '100%',
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
+    // height: '100%',
+    // zIndex: 1,
+    // overflow: 'hidden',
+    // position: 'relative',
+    // display: 'flex',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: 'grey',
+    backgroundColor: 'white',
+    color: 'black'
   },
   drawerPaper: {
     position: 'relative',
@@ -117,39 +120,6 @@ const styles = theme => ({
 });
 
 
-
-const AppWrapper = styled.div`
-  
-  margin: 0 auto;
-  display: flex;
-  min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
-`;
-
-// export default function App() {
-//   return (
-//     <AppWrapper>
-//       <Helmet
-//         titleTemplate="%s - Trust the Hinkie"
-//         defaultTitle="Trust the Hinkie"
-//       >
-//         <meta name="description" content="Trust it" />
-//       </Helmet>
-//       <Header />
-//       <Switch>
-//         <Route exact path="/" component={MainPage} />
-//         <Route path="/features" component={FeaturePage} />
-//         <Route path="/venues" component={VenuePage} />
-//         <Route path="/admin" component={TablePage} />
-//         <Route path="" component={NotFoundPage} />
-//       </Switch>
-//       <Footer />
-//     </AppWrapper>
-//   );
-// }
-
-
 export class App extends React.PureComponent {
 
   componentDidMount() {
@@ -162,46 +132,23 @@ export class App extends React.PureComponent {
 
   render() {
     return (
-      <div className={this.props.classes.root}>
+      <Grid container className={this.props.classes.root} spacing={16}>
         <AppBar position="absolute" className={this.props.classes.appBar}>
           <Toolbar>
             <Typography variant="title" color="inherit" className={this.props.classes.flex} noWrap>
-              Trust the Hinkie
+              <Link to="/">
+                zipstu
+              </Link>                   
             </Typography>
-            <a href="http://localhost/api/login">
-              <Button color="inherit">Login</Button>
-            </a>
+            <Link to="/admin">
+              <Button>Admin</Button>
+            </Link>                        
+            <Link to="/signin">
+              <Button>Sign In</Button>
+            </Link>
           </Toolbar>
         </AppBar>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: this.props.classes.drawerPaper,
-          }}
-        >
-        <div className={this.props.classes.toolbar} />
-        <List>
-          <Link to="/">
-            <ListItem button>
-              <ListItemIcon>
-                <ViewList />
-              </ListItemIcon>
-              <ListItemText primary="Games" />
-            </ListItem>          
-          </Link>
-        </List>
-        <List>
-          <Link to="/admin">
-            <ListItem button>
-              <ListItemIcon>
-                <SupervisorAccount />
-              </ListItemIcon>
-              <ListItemText primary="Admin" />
-            </ListItem>                
-          </Link>
-        </List>
-
-        </Drawer>
+        
         <main className={this.props.classes.content}>
           <div className={this.props.classes.toolbar} />
           <Switch>
@@ -217,33 +164,9 @@ export class App extends React.PureComponent {
           </Switch>
           <Footer />          
         </main>        
-      </div>
+      </Grid>
     )
   }
-
-// <ListItem button component="a" href="/admin">
-
-  // render() {
-  //   return (
-  //     <AppWrapper>
-  //       <Helmet
-  //         titleTemplate="%s - Trust the Hinkie"
-  //         defaultTitle="Trust the Hinkie"
-  //       >
-  //         <meta name="description" content="Trust it" />
-  //       </Helmet>
-  //       <Header />
-  //       <Switch>
-  //         <Route exact path="/" component={MainPage} />
-  //         <Route path="/features" component={FeaturePage} />
-  //         <Route path="/venues" component={VenuePage} />
-  //         <Route path="/admin" component={TablePage} />
-  //         <Route path="" component={NotFoundPage} />
-  //       </Switch>
-  //       <Footer />
-  //     </AppWrapper>
-  //   )
-  // }
 }
 
 App.propTypes = {
